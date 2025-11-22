@@ -1,124 +1,262 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, BrainCircuit, CheckCircle, Play, Sparkles, Video } from "lucide-react";
+import { ArrowRight, BrainCircuit, CheckCircle, Play, Sparkles, Video, Youtube, Wand2, Layers, Zap } from "lucide-react";
 import { Link } from "react-router";
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col overflow-hidden selection:bg-primary/30">
+      {/* Background Gradients */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/10 blur-[120px]" />
+        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[30%] h-[30%] rounded-full bg-blue-500/5 blur-[100px]" />
+      </div>
+
       {/* Navbar */}
-      <nav className="container mx-auto px-6 py-6 flex items-center justify-between">
+      <nav className="container mx-auto px-6 py-6 flex items-center justify-between relative z-50">
         <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-            <BrainCircuit className="h-5 w-5 text-primary-foreground" />
+          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20">
+            <BrainCircuit className="h-6 w-6 text-white" />
           </div>
           <span className="text-xl font-bold tracking-tight">VidGen AI</span>
         </div>
         <div className="flex items-center gap-4">
           <Link to="/auth">
-            <Button variant="ghost">Sign In</Button>
+            <Button variant="ghost" className="hover:bg-primary/5">Sign In</Button>
           </Link>
           <Link to="/auth">
-            <Button>Get Started</Button>
+            <Button className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:scale-105">
+              Get Started
+            </Button>
           </Link>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <main className="flex-1">
-        <section className="container mx-auto px-6 py-24 text-center">
+      <main className="flex-1 relative">
+        <section className="container mx-auto px-6 py-20 md:py-32 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-4xl mx-auto space-y-8"
+            className="max-w-5xl mx-auto space-y-8"
           >
-            <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium bg-secondary/10 text-secondary-foreground border-secondary/20">
-              <Sparkles className="mr-2 h-4 w-4" />
-              <span>AI-Powered Video Creation</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-balance">
-              Turn Ideas into <span className="text-primary">Viral Videos</span> in Minutes
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary backdrop-blur-sm"
+            >
+              <Sparkles className="mr-2 h-4 w-4 fill-primary/20" />
+              <span>AI-Powered Video Creation Suite</span>
+            </motion.div>
+            
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-balance leading-[1.1]">
+              Create <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-secondary animate-gradient bg-300%">Viral Videos</span> <br/>
+              <span className="relative inline-block">
+                in Minutes
+                <svg className="absolute w-full h-3 -bottom-1 left-0 text-secondary/50 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
+                </svg>
+              </span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-balance">
-              The all-in-one platform to generate scripts, voiceovers, visuals, and thumbnails automatically. 
-              Perfect for creators, marketers, and businesses.
+            
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto text-balance leading-relaxed">
+              Transform simple ideas into fully produced YouTube videos. 
+              Script, voice, visuals, and thumbnails — <span className="text-foreground font-semibold">all generated by AI.</span>
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
               <Link to="/auth">
-                <Button size="lg" className="h-12 px-8 text-lg">
+                <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 shadow-xl shadow-primary/25 transition-all hover:scale-105">
                   Start Creating for Free
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="h-12 px-8 text-lg">
-                <Play className="mr-2 h-5 w-5" />
+              <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-2 hover:bg-secondary/10 hover:text-secondary-foreground transition-all">
+                <Play className="mr-2 h-5 w-5 fill-current" />
                 Watch Demo
               </Button>
             </div>
           </motion.div>
 
+          {/* Floating 3D Icons Animation */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl pointer-events-none -z-10 hidden md:block">
+            <FloatingIcon icon={Youtube} className="absolute top-10 left-10 text-red-500" delay={0} />
+            <FloatingIcon icon={Video} className="absolute bottom-20 left-20 text-blue-500" delay={1} />
+            <FloatingIcon icon={Wand2} className="absolute top-20 right-20 text-purple-500" delay={2} />
+            <FloatingIcon icon={Layers} className="absolute bottom-40 right-10 text-orange-500" delay={1.5} />
+          </div>
+
           {/* Hero Image / Preview */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-20 relative mx-auto max-w-5xl"
+            initial={{ opacity: 0, y: 40, rotateX: 20 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
+            className="mt-24 relative mx-auto max-w-5xl perspective-1000"
           >
-            <div className="aspect-video rounded-xl border bg-card shadow-2xl overflow-hidden relative group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="h-20 w-20 rounded-full bg-primary/20 flex items-center justify-center backdrop-blur-sm mx-auto group-hover:scale-110 transition-transform duration-300 cursor-pointer">
-                    <Play className="h-10 w-10 text-primary ml-1" />
+            <div className="aspect-video rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl shadow-2xl overflow-hidden relative group ring-1 ring-white/10">
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-secondary/20 opacity-50" />
+              
+              {/* UI Mockup */}
+              <div className="absolute inset-0 flex flex-col">
+                {/* Mock Header */}
+                <div className="h-12 border-b border-white/10 flex items-center px-4 gap-2 bg-white/5">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground">See how it works</p>
+                  <div className="ml-4 h-6 w-64 bg-white/10 rounded-md" />
                 </div>
-              </div>
-              {/* Mock UI Elements */}
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-background/80 backdrop-blur-md border-t flex items-center px-6 justify-between">
-                <div className="flex items-center gap-4">
-                    <div className="h-2 w-24 bg-primary rounded-full" />
-                    <div className="h-2 w-12 bg-muted rounded-full" />
-                </div>
-                <div className="flex gap-2">
-                    <div className="h-8 w-8 rounded bg-muted" />
-                    <div className="h-8 w-8 rounded bg-muted" />
+                {/* Mock Content */}
+                <div className="flex-1 flex relative">
+                  <div className="w-64 border-r border-white/10 bg-white/5 p-4 space-y-3 hidden md:block">
+                    {[1, 2, 3, 4].map(i => (
+                      <div key={i} className="h-8 w-full bg-white/10 rounded-md animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+                    ))}
+                  </div>
+                  <div className="flex-1 p-8 flex items-center justify-center relative">
+                     <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="relative group-hover:scale-110 transition-transform duration-500">
+                          <div className="absolute inset-0 bg-primary blur-2xl opacity-40 rounded-full" />
+                          <div className="h-24 w-24 rounded-full bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-2xl cursor-pointer relative z-10 border-4 border-white/10">
+                            <Play className="h-10 w-10 text-white ml-1 fill-white" />
+                          </div>
+                        </div>
+                     </div>
+                     {/* Floating Elements in Preview */}
+                     <div className="absolute top-10 right-10 p-3 bg-black/60 backdrop-blur-md rounded-lg border border-white/10 shadow-xl animate-float-slow">
+                        <div className="flex items-center gap-3">
+                           <div className="h-8 w-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
+                              <CheckCircle className="h-5 w-5" />
+                           </div>
+                           <div className="text-xs">
+                              <p className="font-bold text-white">Script Generated</p>
+                              <p className="text-white/60">2.4s ago</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
                 </div>
               </div>
             </div>
-            {/* Decorative blobs */}
-            <div className="absolute -top-20 -right-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl -z-10" />
-            <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-secondary/20 rounded-full blur-3xl -z-10" />
+            
+            {/* Decorative Glows */}
+            <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary/30 rounded-full blur-[100px] -z-10" />
+            <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-secondary/20 rounded-full blur-[100px] -z-10" />
           </motion.div>
         </section>
 
         {/* Features Grid */}
-        <section className="container mx-auto px-6 py-24">
+        <section className="container mx-auto px-6 py-32 relative">
+            <div className="text-center mb-20">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Everything you need to go viral</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Our AI handles the heavy lifting so you can focus on the creative direction.
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
-                    { icon: BrainCircuit, title: "AI Script Writing", desc: "Generate engaging scripts from a single topic or keyword instantly." },
-                    { icon: Video, title: "Auto-Visuals", desc: "Automatically match stock footage and animations to your script." },
-                    { icon: CheckCircle, title: "One-Click Publish", desc: "Seamlessly upload to YouTube with optimized titles and tags." }
+                    { 
+                      icon: BrainCircuit, 
+                      title: "AI Script Writing", 
+                      desc: "Generate engaging scripts from a single topic or keyword instantly.",
+                      color: "text-blue-500",
+                      bg: "bg-blue-500/10"
+                    },
+                    { 
+                      icon: Video, 
+                      title: "Auto-Visuals", 
+                      desc: "Automatically match stock footage and animations to your script.",
+                      color: "text-purple-500",
+                      bg: "bg-purple-500/10"
+                    },
+                    { 
+                      icon: Zap, 
+                      title: "One-Click Publish", 
+                      desc: "Seamlessly upload to YouTube with optimized titles and tags.",
+                      color: "text-yellow-500",
+                      bg: "bg-yellow-500/10"
+                    }
                 ].map((feature, i) => (
-                    <div key={i} className="p-6 rounded-2xl border bg-card hover:shadow-lg transition-shadow">
-                        <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary">
-                            <feature.icon className="h-6 w-6" />
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.2 }}
+                      whileHover={{ y: -10 }}
+                      className="p-8 rounded-3xl border border-white/5 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all hover:shadow-2xl hover:shadow-primary/5 group"
+                    >
+                        <div className={`h-14 w-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
+                            <feature.icon className="h-7 w-7" />
                         </div>
-                        <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                        <p className="text-muted-foreground">{feature.desc}</p>
-                    </div>
+                        <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                        <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+                    </motion.div>
                 ))}
             </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="container mx-auto px-6 pb-32">
+          <div className="rounded-3xl bg-gradient-to-br from-primary/20 via-background to-secondary/20 border border-white/10 p-12 md:p-24 text-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]" />
+            <div className="relative z-10 max-w-3xl mx-auto space-y-8">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Ready to start your channel?</h2>
+              <p className="text-xl text-muted-foreground">
+                Join thousands of creators using VidGen AI to automate their content production.
+              </p>
+              <Link to="/auth">
+                <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-foreground text-background hover:bg-foreground/90 shadow-xl transition-all hover:scale-105">
+                  Get Started Now
+                </Button>
+              </Link>
+            </div>
+          </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="border-t py-12 bg-muted/30">
-        <div className="container mx-auto px-6 text-center text-muted-foreground">
-            <p>&copy; 2024 VidGen AI. All rights reserved.</p>
+      <footer className="border-t border-white/10 py-12 bg-black/20 backdrop-blur-lg">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <BrainCircuit className="h-5 w-5" />
+              <span className="font-bold text-foreground">VidGen AI</span>
+            </div>
+            <p className="text-sm">&copy; 2024 VidGen AI. All rights reserved.</p>
+            <div className="flex gap-6 text-sm">
+              <a href="#" className="hover:text-primary transition-colors">Privacy</a>
+              <a href="#" className="hover:text-primary transition-colors">Terms</a>
+              <a href="#" className="hover:text-primary transition-colors">Twitter</a>
+            </div>
         </div>
       </footer>
     </div>
+  );
+}
+
+function FloatingIcon({ icon: Icon, className, delay }: { icon: any, className?: string, delay: number }) {
+  return (
+    <motion.div
+      animate={{ 
+        y: [0, -20, 0],
+        rotate: [0, 5, -5, 0],
+      }}
+      transition={{ 
+        duration: 5,
+        repeat: Infinity,
+        delay: delay,
+        ease: "easeInOut"
+      }}
+      className={className}
+    >
+      <div className="h-16 w-16 rounded-2xl bg-background/80 backdrop-blur-md border border-white/10 shadow-2xl flex items-center justify-center transform hover:scale-110 transition-transform duration-300 cursor-pointer">
+        <Icon className="h-8 w-8" />
+      </div>
+    </motion.div>
   );
 }
