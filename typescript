@@ -1,5 +1,0 @@
-import { Settings } from "@/components/Settings";
-
-import { useMutation, useQuery, useAction } from "convex/react";
-
-const generateScript = useAction(api.ai.generateScript);
