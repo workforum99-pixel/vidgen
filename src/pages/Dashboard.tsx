@@ -113,10 +113,17 @@ export default function Dashboard() {
           ) : (
             <>
               {/* Header */}
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <h1 className="text-3xl font-bold tracking-tight">Create New Video</h1>
-                  <p className="text-muted-foreground">Go from idea to published video in 5 simple steps.</p>
+              <div className="flex items-center justify-between mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
+                <div className="space-y-2">
+                  <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent animate-gradient bg-300% pb-1">
+                    Think, Create & Publish
+                  </h1>
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-yellow-500 animate-pulse" />
+                    <p className="text-xl font-medium text-muted-foreground/80">
+                      Go from idea to published video in <span className="text-foreground font-bold underline decoration-primary/50 underline-offset-4">5 simple steps</span>.
+                    </p>
+                  </div>
                 </div>
               </div>
 
