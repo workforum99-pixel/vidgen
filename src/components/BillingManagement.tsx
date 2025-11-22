@@ -16,6 +16,16 @@ import { useNavigate } from "react-router";
 export function BillingManagement() {
   const [isYearly, setIsYearly] = useState(false);
   const navigate = useNavigate();
+  
+  const [paymentMethods, setPaymentMethods] = useState([
+    { id: 1, type: "Visa", last4: "4242", expiry: "12/28", isDefault: true },
+    { id: 2, type: "Mastercard", last4: "8899", expiry: "09/26", isDefault: false },
+  ]);
+
+  const removePaymentMethod = (id: number) => {
+    setPaymentMethods(paymentMethods.filter(pm => pm.id !== id));
+    toast.success("Payment method removed successfully");
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-6xl mx-auto pb-12">
@@ -146,30 +156,37 @@ export function BillingManagement() {
               <CardDescription>Manage your saved payment methods.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex items-center gap-4">
-                  <div className="h-10 w-14 bg-muted rounded flex items-center justify-center border">
-                    <CreditCard className="h-6 w-6" />
+              {paymentMethods.map((method) => (
+                <div key={method.id} className="flex items-center justify-between p-4 border rounded-lg animate-in fade-in slide-in-from-left-2">
+                  <div className="flex items-center gap-4">
+                    <div className="h-10 w-14 bg-muted rounded flex items-center justify-center border">
+                      <CreditCard className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="font-medium">{method.type} ending in {method.last4}</p>
+                      <p className="text-sm text-muted-foreground">Expires {method.expiry}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium">Visa ending in 4242</p>
-                    <p className="text-sm text-muted-foreground">Expires 12/28</p>
-                  </div>
+                  {method.isDefault ? (
+                    <Badge variant="secondary">Default</Badge>
+                  ) : (
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                      onClick={() => removePaymentMethod(method.id)}
+                    >
+                      Remove
+                    </Button>
+                  )}
                 </div>
-                <Badge variant="secondary">Default</Badge>
-              </div>
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex items-center gap-4">
-                  <div className="h-10 w-14 bg-muted rounded flex items-center justify-center border">
-                    <CreditCard className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Mastercard ending in 8899</p>
-                    <p className="text-sm text-muted-foreground">Expires 09/26</p>
-                  </div>
+              ))}
+              
+              {paymentMethods.length === 0 && (
+                <div className="text-center py-8 text-muted-foreground border-2 border-dashed rounded-lg">
+                  No payment methods saved.
                 </div>
-                <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">Remove</Button>
-              </div>
+              )}
               
               <Dialog>
                 <DialogTrigger asChild>
