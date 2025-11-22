@@ -627,7 +627,13 @@ export default function Dashboard() {
                               onChange={(e) => setScheduledTime(e.target.value)}
                             />
                           </div>
-                          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20">
+                          <Button 
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20"
+                            onClick={() => {
+                              toast.success("Video scheduled successfully!");
+                              navigate("/dashboard/videos");
+                            }}
+                          >
                             Submit Schedule
                           </Button>
                         </div>
