@@ -25,7 +25,7 @@ export function Sidebar({ className }: SidebarProps) {
 
   return (
     <div className={cn("pb-12 w-64 border-r bg-sidebar text-sidebar-foreground hidden md:flex md:flex-col", className)}>
-      <div className="space-y-4 py-4 flex-1">
+      <div className="space-y-4 py-4 flex-1 flex flex-col">
         <div className="px-3 py-2">
           <div className="flex items-center gap-2 px-4 mb-8">
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
@@ -79,21 +79,6 @@ export function Sidebar({ className }: SidebarProps) {
             </Link>
           </div>
         </div>
-      </div>
-      <div className="absolute bottom-4 left-0 w-full px-6">
-        <div className="flex items-center gap-4 mb-4">
-            <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center overflow-hidden">
-                {user?.image ? <img src={user.image} alt="User" /> : <User className="h-4 w-4" />}
-            </div>
-            <div className="text-sm">
-                <p className="font-medium">{user?.name || "User"}</p>
-                <p className="text-xs text-muted-foreground truncate max-w-[120px]">{user?.email}</p>
-            </div>
-        </div>
-        <Button variant="outline" className="w-full justify-start" onClick={() => signOut()}>
-            <LogOut className="mr-2 h-4 w-4" />
-            Sign Out
-        </Button>
       </div>
     </div>
   );

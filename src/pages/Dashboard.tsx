@@ -29,14 +29,18 @@ import {
   PenTool,
   Bot,
   CalendarClock,
+  User,
+  LogOut,
+  Settings,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/use-auth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Dashboard() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -47,6 +51,7 @@ export default function Dashboard() {
   }, [isLoading, isAuthenticated, navigate]);
 
   const isVideosPage = location.pathname.includes("/videos");
+  const isSettingsPage = location.pathname.includes("/settings");
   
   const [currentStep, setCurrentStep] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -187,6 +192,58 @@ export default function Dashboard() {
                   ))}
                 </div>
               </div>
+            </div>
+          ) : isSettingsPage ? (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-2xl mx-auto">
+              <div className="flex items-center gap-2 mb-8">
+                <Settings className="h-8 w-8 text-primary" />
+                <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+              </div>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Account Information</CardTitle>
+                  <CardDescription>Manage your account details and preferences.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="flex items-center gap-4 p-4 border rounded-lg bg-muted/30">
+                    <Avatar className="h-16 w-16 border-2 border-primary/20">
+                      <AvatarImage src={user?.image} />
+                      <AvatarFallback className="bg-primary/10 text-primary text-xl">
+                        {user?.name?.charAt(0) || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="space-y-1">
+                      <h3 className="font-semibold text-lg">{user?.name || "User"}</h3>
+                      <p className="text-sm text-muted-foreground">{user?.email}</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="grid gap-2">
+                      <Label>Display Name</Label>
+                      <Input defaultValue={user?.name} disabled />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label>Email Address</Label>
+                      <Input defaultValue={user?.email} disabled />
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  <div className="pt-2">
+                    <Button 
+                      variant="destructive" 
+                      className="w-full sm:w-auto" 
+                      onClick={() => signOut()}
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Sign Out
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           ) : (
             <>
@@ -608,7 +665,7 @@ export default function Dashboard() {
           </div>
 
           {/* Navigation Buttons */}
-          {!isVideosPage && (
+          {!isVideosPage && !isSettingsPage && (
             <div className="flex justify-between mt-8 pt-8 border-t">
               <Button
                 variant="outline"
