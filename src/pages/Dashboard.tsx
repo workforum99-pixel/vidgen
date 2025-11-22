@@ -129,16 +129,16 @@ export default function Dashboard() {
 
               {/* Progress Tracker */}
               <div className="mb-12 px-4">
-                <div className="relative flex justify-between items-center">
+                <div className="relative flex justify-between items-start">
                   {/* Background Track (Dotted) */}
-                  <div className="absolute top-5 left-0 w-full h-0.5 -translate-y-1/2 z-0">
+                  <div className="absolute top-5 left-12 right-12 h-0.5 -translate-y-1/2 z-0">
                      <div className="w-full h-full border-t-2 border-dotted border-muted-foreground/30" />
                   </div>
                   
                   {/* Progress Line (Solid) */}
                   <div 
-                    className="absolute top-5 left-0 h-1 bg-primary -translate-y-1/2 transition-all duration-500 ease-in-out origin-left z-0"
-                    style={{ width: `${((currentStep - 1) / 4) * 100}%` }}
+                    className="absolute top-5 left-12 h-1 bg-primary -translate-y-1/2 transition-all duration-500 ease-in-out origin-left z-0"
+                    style={{ width: `calc((100% - 6rem) * ${(currentStep - 1) / 4})` }}
                   />
 
                   {[
@@ -148,7 +148,7 @@ export default function Dashboard() {
                     { id: 4, label: "Thumbnail", icon: ImageIcon },
                     { id: 5, label: "Publish", icon: Youtube },
                   ].map((step) => (
-                    <div key={step.id} className="relative flex flex-col items-center gap-2 z-10">
+                    <div key={step.id} className="relative flex flex-col items-center gap-2 z-10 w-24">
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                           currentStep >= step.id
@@ -163,7 +163,7 @@ export default function Dashboard() {
                         )}
                       </div>
                       <span
-                        className={`text-xs font-medium ${
+                        className={`text-xs font-medium text-center ${
                           currentStep >= step.id ? "text-primary" : "text-muted-foreground"
                         }`}
                       >
