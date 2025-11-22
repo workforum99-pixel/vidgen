@@ -5,24 +5,20 @@ import { Link } from "react-router";
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col overflow-hidden selection:bg-primary/30">
+    <div className="min-h-screen bg-white text-foreground flex flex-col overflow-hidden selection:bg-primary/30">
       {/* Background Gradients */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        {/* Richer, more vibrant background blobs */}
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary/20 blur-[130px] animate-pulse" style={{ animationDuration: '15s' }} />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-secondary/20 blur-[130px] animate-pulse" style={{ animationDuration: '18s', animationDelay: '2s' }} />
-        <div className="absolute top-[30%] right-[-10%] w-[40%] h-[50%] rounded-full bg-blue-500/20 blur-[120px] animate-pulse" style={{ animationDuration: '20s', animationDelay: '5s' }} />
-        <div className="absolute bottom-[10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-purple-500/20 blur-[120px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '1s' }} />
+        {/* Elegant, Royal Sprayed Background - Moving Concentration */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px] animate-pulse" style={{ animationDuration: '15s' }} />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/10 blur-[120px] animate-pulse" style={{ animationDuration: '18s', animationDelay: '2s' }} />
+        <div className="absolute top-[20%] right-[-5%] w-[40%] h-[40%] rounded-full bg-secondary/15 blur-[100px] animate-pulse" style={{ animationDuration: '20s', animationDelay: '5s' }} />
+        <div className="absolute bottom-[10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[100px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '1s' }} />
         
-        {/* Additional Royal/Vibrant distributed glows */}
-        <div className="absolute top-[10%] left-[20%] w-[30%] h-[30%] rounded-full bg-indigo-500/15 blur-[100px] animate-pulse" style={{ animationDuration: '14s', animationDelay: '3s' }} />
-        <div className="absolute bottom-[30%] right-[20%] w-[30%] h-[30%] rounded-full bg-violet-500/15 blur-[100px] animate-pulse" style={{ animationDuration: '16s', animationDelay: '4s' }} />
-
-        {/* Center ambient glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10 blur-[100px] opacity-80" />
+        {/* Center ambient glow - Royal Azure & Soft Gold mix */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] rounded-full bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5 blur-[80px] opacity-70" />
         
-        {/* Subtle Grid Pattern for texture */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        {/* Subtle Grid Pattern for texture - kept very subtle */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       </div>
 
       {/* Navbar */}
