@@ -16,7 +16,7 @@ import {
 
 import { useAuth } from "@/hooks/use-auth";
 import { ArrowRight, Loader2, Mail, UserX } from "lucide-react";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { useNavigate } from "react-router";
 
 interface AuthProps {
@@ -24,19 +24,12 @@ interface AuthProps {
 }
 
 function Auth({ redirectAfterAuth }: AuthProps = {}) {
-  const { isLoading: authLoading, isAuthenticated, signIn } = useAuth();
+  const { isLoading: authLoading, isAuthenticated, signIn, signOut, user } = useAuth();
   const navigate = useNavigate();
   const [step, setStep] = useState<"signIn" | { email: string }>("signIn");
   const [otp, setOtp] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!authLoading && isAuthenticated) {
-      const redirect = redirectAfterAuth || "/";
-      navigate(redirect);
-    }
-  }, [authLoading, isAuthenticated, navigate, redirectAfterAuth]);
 
   if (authLoading) {
     return (
@@ -46,11 +39,45 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
     );
   }
 
-  // Prevent flash of content if already authenticated and redirecting
+  // Show welcome back screen if already authenticated
   if (isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+        <div className="flex items-center justify-center flex-col">
+          <Card className="min-w-[350px] border shadow-md">
+            <CardHeader className="text-center">
+              <div className="flex justify-center">
+                <img
+                  src="./logo.svg"
+                  alt="Logo"
+                  width={64}
+                  height={64}
+                  className="rounded-lg mb-4 mt-4"
+                />
+              </div>
+              <CardTitle className="text-xl">Welcome back!</CardTitle>
+              <CardDescription>
+                You are already signed in{user?.email ? ` as ${user.email}` : ""}.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-3">
+              <Button 
+                className="w-full" 
+                onClick={() => navigate(redirectAfterAuth || "/")}
+              >
+                Go to Dashboard
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button 
+                variant="outline" 
+                className="w-full" 
+                onClick={() => signOut()}
+              >
+                Sign Out
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
