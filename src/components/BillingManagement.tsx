@@ -17,6 +17,11 @@ import { useNavigate } from "react-router";
 export function BillingManagement() {
   const [isYearly, setIsYearly] = useState(false);
   const navigate = useNavigate();
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  
+  // Form states
+  const [newCard, setNewCard] = useState({ name: "", number: "", expiry: "", cvc: "" });
+  const [newUpi, setNewUpi] = useState("");
   
   const [paymentMethods, setPaymentMethods] = useState([
     { id: 1, type: "Visa", last4: "4242", expiry: "12/28", isDefault: true },
@@ -26,6 +31,50 @@ export function BillingManagement() {
   const removePaymentMethod = (id: number) => {
     setPaymentMethods(paymentMethods.filter(pm => pm.id !== id));
     toast.success("Payment method removed successfully");
+  };
+
+  const handleAddCard = () => {
+    if (!newCard.number || !newCard.expiry || !newCard.name || !newCard.cvc) {
+      toast.error("Please fill in all card details");
+      return;
+    }
+    
+    // Simple mock validation and type detection
+    const last4 = newCard.number.slice(-4) || "0000";
+    const type = newCard.number.startsWith("4") ? "Visa" : newCard.number.startsWith("5") ? "Mastercard" : "Card";
+    
+    const newMethod = {
+      id: Date.now(),
+      type,
+      last4,
+      expiry: newCard.expiry,
+      isDefault: false,
+    };
+
+    setPaymentMethods([...paymentMethods, newMethod]);
+    setIsAddDialogOpen(false);
+    setNewCard({ name: "", number: "", expiry: "", cvc: "" }); // Reset form
+    toast.success("Card added successfully");
+  };
+
+  const handleAddUPI = () => {
+    if (!newUpi) {
+      toast.error("Please enter a UPI ID");
+      return;
+    }
+
+    const newMethod = {
+      id: Date.now(),
+      type: "UPI",
+      last4: newUpi, // Storing the ID in last4 for display simplicity
+      expiry: "N/A",
+      isDefault: false,
+    };
+
+    setPaymentMethods([...paymentMethods, newMethod]);
+    setIsAddDialogOpen(false);
+    setNewUpi(""); // Reset form
+    toast.success("UPI ID added successfully");
   };
 
   return (
@@ -161,11 +210,19 @@ export function BillingManagement() {
                 <div key={method.id} className="flex items-center justify-between p-4 border rounded-lg animate-in fade-in slide-in-from-left-2">
                   <div className="flex items-center gap-4">
                     <div className="h-10 w-14 bg-muted rounded flex items-center justify-center border">
-                      <CreditCard className="h-6 w-6" />
+                      {method.type === "UPI" ? (
+                        <Smartphone className="h-6 w-6" />
+                      ) : (
+                        <CreditCard className="h-6 w-6" />
+                      )}
                     </div>
                     <div>
-                      <p className="font-medium">{method.type} ending in {method.last4}</p>
-                      <p className="text-sm text-muted-foreground">Expires {method.expiry}</p>
+                      <p className="font-medium">
+                        {method.type === "UPI" ? `UPI ID: ${method.last4}` : `${method.type} ending in ${method.last4}`}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {method.type === "UPI" ? "Verified" : `Expires ${method.expiry}`}
+                      </p>
                     </div>
                   </div>
                   {method.isDefault ? (
@@ -185,7 +242,7 @@ export function BillingManagement() {
                         <AlertDialogHeader>
                           <AlertDialogTitle>Remove Payment Method?</AlertDialogTitle>
                           <AlertDialogDescription>
-                            Are you sure you want to remove this payment method ending in {method.last4}? This action cannot be undone.
+                            Are you sure you want to remove this {method.type === "UPI" ? "UPI ID" : "card"}? This action cannot be undone.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -206,7 +263,7 @@ export function BillingManagement() {
                 </div>
               )}
               
-              <Dialog>
+              <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
                 <DialogTrigger asChild>
                   <Button variant="outline" className="w-full border-dashed">
                     <CreditCard className="mr-2 h-4 w-4" />
@@ -228,30 +285,55 @@ export function BillingManagement() {
                     <TabsContent value="card" className="space-y-4 pt-4">
                       <div className="space-y-2">
                         <Label htmlFor="name">Cardholder Name</Label>
-                        <Input id="name" placeholder="John Doe" />
+                        <Input 
+                          id="name" 
+                          placeholder="John Doe" 
+                          value={newCard.name}
+                          onChange={(e) => setNewCard({...newCard, name: e.target.value})}
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="number">Card Number</Label>
-                        <Input id="number" placeholder="0000 0000 0000 0000" />
+                        <Input 
+                          id="number" 
+                          placeholder="0000 0000 0000 0000" 
+                          value={newCard.number}
+                          onChange={(e) => setNewCard({...newCard, number: e.target.value})}
+                        />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="expiry">Expiry Date</Label>
-                          <Input id="expiry" placeholder="MM/YY" />
+                          <Input 
+                            id="expiry" 
+                            placeholder="MM/YY" 
+                            value={newCard.expiry}
+                            onChange={(e) => setNewCard({...newCard, expiry: e.target.value})}
+                          />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="cvc">CVC</Label>
-                          <Input id="cvc" placeholder="123" />
+                          <Input 
+                            id="cvc" 
+                            placeholder="123" 
+                            value={newCard.cvc}
+                            onChange={(e) => setNewCard({...newCard, cvc: e.target.value})}
+                          />
                         </div>
                       </div>
-                      <Button className="w-full" onClick={() => toast.success("Card added successfully")}>Save Card</Button>
+                      <Button className="w-full" onClick={handleAddCard}>Save Card</Button>
                     </TabsContent>
                     <TabsContent value="upi" className="space-y-4 pt-4">
                       <div className="space-y-2">
                         <Label htmlFor="upi-id">UPI ID</Label>
-                        <Input id="upi-id" placeholder="username@bank" />
+                        <Input 
+                          id="upi-id" 
+                          placeholder="username@bank" 
+                          value={newUpi}
+                          onChange={(e) => setNewUpi(e.target.value)}
+                        />
                       </div>
-                      <Button className="w-full" onClick={() => toast.success("UPI ID added successfully")}>Verify & Save UPI</Button>
+                      <Button className="w-full" onClick={handleAddUPI}>Verify & Save UPI</Button>
                     </TabsContent>
                   </Tabs>
                 </DialogContent>
