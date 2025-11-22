@@ -28,6 +28,7 @@ import {
   Clapperboard,
   PenTool,
   Bot,
+  CalendarClock,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
@@ -57,6 +58,10 @@ export default function Dashboard() {
   const [videoLength, setVideoLength] = useState("medium");
   const [isCustomLength, setIsCustomLength] = useState(false);
   const [tone, setTone] = useState("engaging");
+  
+  // Scheduling State
+  const [isScheduling, setIsScheduling] = useState(false);
+  const [scheduledTime, setScheduledTime] = useState("");
 
   // Check for template data from navigation
   useEffect(() => {
@@ -599,6 +604,35 @@ export default function Dashboard() {
                       <Youtube className="mr-2 h-5 w-5" />
                       Publish to YouTube Now
                     </Button>
+
+                    <div className="space-y-4">
+                      <Button 
+                        variant="outline" 
+                        size="lg" 
+                        className="w-full bg-background hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300"
+                        onClick={() => setIsScheduling(!isScheduling)}
+                      >
+                        <CalendarClock className="mr-2 h-5 w-5" />
+                        Schedule for later
+                      </Button>
+
+                      {isScheduling && (
+                        <div className="p-4 border rounded-xl bg-muted/20 space-y-4 animate-in fade-in slide-in-from-top-2">
+                          <div className="space-y-2">
+                            <Label>Select Publication Time</Label>
+                            <Input 
+                              type="datetime-local" 
+                              className="bg-background border-foreground/20"
+                              value={scheduledTime}
+                              onChange={(e) => setScheduledTime(e.target.value)}
+                            />
+                          </div>
+                          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20">
+                            Submit Schedule
+                          </Button>
+                        </div>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               </div>
