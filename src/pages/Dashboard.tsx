@@ -38,6 +38,7 @@ import { useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Billing } from "@/components/Billing";
 
 export default function Dashboard() {
   const { isAuthenticated, isLoading, user, signOut } = useAuth();
@@ -52,6 +53,7 @@ export default function Dashboard() {
 
   const isVideosPage = location.pathname.includes("/videos");
   const isSettingsPage = location.pathname.includes("/settings");
+  const isBillingPage = location.pathname.includes("/billing");
   
   const [currentStep, setCurrentStep] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -245,6 +247,8 @@ export default function Dashboard() {
                 </CardContent>
               </Card>
             </div>
+          ) : isBillingPage ? (
+            <Billing />
           ) : (
             <>
               {/* Header */}
@@ -665,7 +669,7 @@ export default function Dashboard() {
           </div>
 
           {/* Navigation Buttons */}
-          {!isVideosPage && !isSettingsPage && (
+          {!isVideosPage && !isSettingsPage && !isBillingPage && (
             <div className="flex justify-between mt-8 pt-8 border-t">
               <Button
                 variant="outline"
