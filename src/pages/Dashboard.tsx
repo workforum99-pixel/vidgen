@@ -357,7 +357,7 @@ export default function Dashboard() {
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-base font-semibold">Tone</Label>
+                        <Label className="text-base font-semibold">Tone of the Video</Label>
                         <Select value={tone} onValueChange={setTone}>
                           <SelectTrigger className="border-foreground/20 bg-muted/5">
                             <SelectValue />
@@ -367,6 +367,9 @@ export default function Dashboard() {
                             <SelectItem value="engaging">Engaging</SelectItem>
                             <SelectItem value="funny">Funny</SelectItem>
                             <SelectItem value="tutorial">Tutorial</SelectItem>
+                            <SelectItem value="fantasy">Fantasy</SelectItem>
+                            <SelectItem value="adventurous">Adventurous</SelectItem>
+                            <SelectItem value="curious">Curious</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
