@@ -13,6 +13,7 @@ import {
   User,
   Video,
   BarChart3,
+  HelpCircle,
 } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useAuth } from "@/hooks/use-auth";
@@ -83,8 +84,24 @@ export function Sidebar({ className }: SidebarProps) {
             </Link>
           </div>
         </div>
+        
         <div className="px-3 py-2 mt-auto">
           <h2 className="mb-2 px-4 text-xs font-semibold tracking-tight text-muted-foreground">
+            Support
+          </h2>
+          <div className="space-y-1">
+            <Link to="/dashboard/faq">
+              <Button
+                variant={isActive("/dashboard/faq") ? "secondary" : "ghost"}
+                className="w-full justify-start"
+              >
+                <HelpCircle className="mr-2 h-4 w-4" />
+                FAQ
+              </Button>
+            </Link>
+          </div>
+          
+          <h2 className="mb-2 px-4 text-xs font-semibold tracking-tight text-muted-foreground mt-4">
             Settings
           </h2>
           <div className="space-y-1">
