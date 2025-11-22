@@ -310,8 +310,13 @@ export default function Dashboard() {
                           <div className="relative">
                             <Input
                               value={videoLength}
-                              onChange={(e) => setVideoLength(e.target.value)}
-                              placeholder="e.g., 10 minutes"
+                              onChange={(e) => {
+                                const value = e.target.value;
+                                if (value === "" || /^\d+$/.test(value)) {
+                                  setVideoLength(value);
+                                }
+                              }}
+                              placeholder="e.g., 10"
                               className="border-foreground/20 bg-muted/5 pr-10"
                               autoFocus
                             />
