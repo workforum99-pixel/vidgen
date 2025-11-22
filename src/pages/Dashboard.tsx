@@ -31,7 +31,7 @@ import {
   CalendarClock,
   User,
   LogOut,
-  Settings,
+  Settings as SettingsIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
@@ -42,6 +42,7 @@ import { Billing } from "@/components/Billing";
 import { BillingManagement } from "@/components/BillingManagement";
 import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
 import { FAQ } from "@/components/FAQ";
+import { Settings } from "@/components/Settings";
 
 export default function Dashboard() {
   const { isAuthenticated, isLoading, user, signOut } = useAuth();
@@ -202,57 +203,7 @@ export default function Dashboard() {
               </div>
             </div>
           ) : isSettingsPage ? (
-            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-2xl mx-auto">
-              <div className="flex items-center gap-2 mb-8">
-                <Settings className="h-8 w-8 text-primary" />
-                <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-              </div>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Account Information</CardTitle>
-                  <CardDescription>Manage your account details and preferences.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center gap-4 p-4 border rounded-lg bg-muted/30">
-                    <Avatar className="h-16 w-16 border-2 border-primary/20">
-                      <AvatarImage src={user?.image} />
-                      <AvatarFallback className="bg-primary/10 text-primary text-xl">
-                        {user?.name?.charAt(0) || "U"}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="space-y-1">
-                      <h3 className="font-semibold text-lg">{user?.name || "User"}</h3>
-                      <p className="text-sm text-muted-foreground">{user?.email}</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="grid gap-2">
-                      <Label>Display Name</Label>
-                      <Input defaultValue={user?.name} disabled />
-                    </div>
-                    <div className="grid gap-2">
-                      <Label>Email Address</Label>
-                      <Input defaultValue={user?.email} disabled />
-                    </div>
-                  </div>
-
-                  <Separator />
-
-                  <div className="pt-2">
-                    <Button 
-                      variant="destructive" 
-                      className="w-full sm:w-auto" 
-                      onClick={() => signOut()}
-                    >
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Sign Out
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+            <Settings />
           ) : isPricingPage ? (
             <Billing />
           ) : isBillingPage ? (
