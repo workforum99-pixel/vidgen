@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { CreditCard, Download, FileText, ShieldCheck, Wallet, AlertCircle, CheckCircle2, Building, User, MapPin, Globe, Smartphone } from "lucide-react";
 import { useState } from "react";
@@ -170,14 +171,31 @@ export function BillingManagement() {
                   {method.isDefault ? (
                     <Badge variant="secondary">Default</Badge>
                   ) : (
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                      onClick={() => removePaymentMethod(method.id)}
-                    >
-                      Remove
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                        >
+                          Remove
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Remove Payment Method?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure you want to remove this payment method ending in {method.last4}? This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => removePaymentMethod(method.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                            Remove
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   )}
                 </div>
               ))}
