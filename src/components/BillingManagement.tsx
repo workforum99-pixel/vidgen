@@ -7,11 +7,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CreditCard, Download, FileText, ShieldCheck, Wallet, AlertCircle, CheckCircle2, Building, User, MapPin, Globe } from "lucide-react";
+import { CreditCard, Download, FileText, ShieldCheck, Wallet, AlertCircle, CheckCircle2, Building, User, MapPin, Globe, Smartphone } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export function BillingManagement() {
   const [isYearly, setIsYearly] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-6xl mx-auto pb-12">
@@ -48,7 +50,7 @@ export function BillingManagement() {
                 </div>
                 <div className="flex gap-3">
                   <Button variant="outline">Cancel Subscription</Button>
-                  <Button>Change Plan</Button>
+                  <Button onClick={() => navigate("/dashboard/pricing")}>Change Plan</Button>
                 </div>
               </div>
 
@@ -116,8 +118,8 @@ export function BillingManagement() {
                         <span className="text-xs">Card</span>
                       </Button>
                       <Button variant="outline" className="h-auto py-4 flex flex-col gap-2">
-                        <Wallet className="h-6 w-6" />
-                        <span className="text-xs">Wallet</span>
+                        <Smartphone className="h-6 w-6" />
+                        <span className="text-xs">UPI</span>
                       </Button>
                     </div>
                   </div>
