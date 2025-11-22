@@ -14,6 +14,10 @@ export default function Landing() {
         <div className="absolute top-[30%] right-[-10%] w-[40%] h-[50%] rounded-full bg-blue-500/20 blur-[120px] animate-pulse" style={{ animationDuration: '20s', animationDelay: '5s' }} />
         <div className="absolute bottom-[10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-purple-500/20 blur-[120px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '1s' }} />
         
+        {/* Additional Royal/Vibrant distributed glows */}
+        <div className="absolute top-[10%] left-[20%] w-[30%] h-[30%] rounded-full bg-indigo-500/15 blur-[100px] animate-pulse" style={{ animationDuration: '14s', animationDelay: '3s' }} />
+        <div className="absolute bottom-[30%] right-[20%] w-[30%] h-[30%] rounded-full bg-violet-500/15 blur-[100px] animate-pulse" style={{ animationDuration: '16s', animationDelay: '4s' }} />
+
         {/* Center ambient glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10 blur-[100px] opacity-80" />
         
@@ -216,9 +220,14 @@ export default function Landing() {
         </section>
 
         {/* CTA Section */}
-        <section className="container mx-auto px-6 pb-32">
-          <div className="rounded-3xl bg-gradient-to-br from-primary/20 via-background to-secondary/20 border border-white/10 p-12 md:p-24 text-center relative overflow-hidden">
+        <section className="container mx-auto px-6 pb-32 relative z-10">
+          <div className="rounded-3xl bg-gradient-to-br from-primary/30 via-background to-purple-500/20 border border-foreground/20 shadow-2xl shadow-primary/10 p-12 md:p-24 text-center relative overflow-hidden group">
             <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]" />
+            
+            {/* Royal Glow Effect inside CTA */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/30 blur-[80px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-secondary/30 blur-[80px] rounded-full pointer-events-none" />
+            
             <div className="relative z-10 max-w-3xl mx-auto space-y-8">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Ready to start your channel?</h2>
               <p className="text-xl text-muted-foreground">
