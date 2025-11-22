@@ -32,12 +32,41 @@ const schema = defineSchema(
       role: v.optional(roleValidator), // role of the user. do not remove
     }).index("email", ["email"]), // index for the email. do not remove or modify
 
-    // add other tables here
+    projects: defineTable({
+      userId: v.id("users"),
+      title: v.string(),
+      status: v.string(), // "draft", "generating", "completed", "published"
+      step: v.number(), // 1-5
+      
+      // Step 1 Data
+      idea: v.optional(v.string()),
+      script: v.optional(v.string()),
+      videoLength: v.optional(v.string()),
+      tone: v.optional(v.string()),
+      keywords: v.optional(v.string()),
 
-    // tableName: defineTable({
-    //   ...
-    //   // table fields
-    // }).index("by_field", ["field"])
+      // Step 2 Data
+      voiceId: v.optional(v.string()),
+      bgMusic: v.optional(v.string()),
+      soundEffects: v.optional(v.boolean()),
+      audioUrl: v.optional(v.string()),
+
+      // Step 3 Data
+      visualStyle: v.optional(v.string()),
+      subtitles: v.optional(v.boolean()),
+      videoUrl: v.optional(v.string()),
+
+      // Step 4 Data
+      thumbnailPrompt: v.optional(v.string()),
+      thumbnailUrl: v.optional(v.string()),
+
+      // Step 5 Data
+      seoTitle: v.optional(v.string()),
+      seoDescription: v.optional(v.string()),
+      seoTags: v.optional(v.string()),
+      youtubePrivacy: v.optional(v.string()),
+      publishedUrl: v.optional(v.string()),
+    }).index("by_user", ["userId"]),
   },
   {
     schemaValidation: false,
