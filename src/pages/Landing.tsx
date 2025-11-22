@@ -223,11 +223,14 @@ export default function Landing() {
       {/* Footer */}
       <footer className="border-t border-white/10 py-12 bg-black/20 backdrop-blur-lg">
         <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <BrainCircuit className="h-5 w-5" />
-              <span className="font-bold text-foreground">VidGen AI</span>
+            <div className="flex items-center gap-3 px-5 py-2.5 rounded-3xl bg-background/40 backdrop-blur-md border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-500 group cursor-pointer hover:-translate-y-1">
+              <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-500 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <BrainCircuit className="h-5 w-5 text-white relative z-10" />
+              </div>
+              <span className="font-bold text-foreground text-lg tracking-tight group-hover:text-primary transition-colors">VidGen AI</span>
             </div>
-            <p className="text-sm">&copy; 2024 VidGen AI. All rights reserved.</p>
+            <p className="text-sm">&copy; 2025 VidGen AI. All rights reserved.</p>
             <div className="flex gap-6 text-sm">
               <a href="#" className="hover:text-primary transition-colors">Privacy</a>
               <a href="#" className="hover:text-primary transition-colors">Terms</a>
