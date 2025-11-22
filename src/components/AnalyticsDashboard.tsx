@@ -133,28 +133,8 @@ export function AnalyticsDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Sidebar Navigation (Internal) */}
-        <div className="lg:col-span-2 hidden lg:block space-y-2">
-          {[
-            { icon: LayoutDashboard, label: "Overview", active: true },
-            { icon: Video, label: "Content", active: false },
-            { icon: Users, label: "Audience", active: false },
-            { icon: DollarSign, label: "Revenue", active: false },
-            { icon: Settings, label: "Settings", active: false },
-          ].map((item, i) => (
-            <Button
-              key={i}
-              variant={item.active ? "secondary" : "ghost"}
-              className={cn("w-full justify-start", item.active && "bg-secondary font-semibold")}
-            >
-              <item.icon className="mr-2 h-4 w-4" />
-              {item.label}
-            </Button>
-          ))}
-        </div>
-
         {/* Main Content Area */}
-        <div className="lg:col-span-10 space-y-8">
+        <div className="lg:col-span-12 space-y-8">
           
           {/* KPI Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
