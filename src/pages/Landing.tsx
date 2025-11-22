@@ -217,25 +217,40 @@ export default function Landing() {
 
         {/* CTA Section */}
         <section className="container mx-auto px-6 pb-32 relative z-10">
-          <div className="rounded-3xl bg-gradient-to-br from-primary/30 via-background to-purple-500/20 border border-foreground/20 shadow-2xl shadow-primary/10 p-12 md:p-24 text-center relative overflow-hidden group">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            whileHover={{ scale: 1.01 }}
+            className="rounded-3xl bg-gradient-to-br from-primary/30 via-background to-purple-500/20 border border-foreground/20 shadow-2xl shadow-primary/10 p-12 md:p-24 text-center relative overflow-hidden group"
+          >
             <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]" />
             
             {/* Royal Glow Effect inside CTA */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/30 blur-[80px] rounded-full pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-secondary/30 blur-[80px] rounded-full pointer-events-none" />
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -top-24 -right-24 w-64 h-64 bg-primary/30 blur-[80px] rounded-full pointer-events-none group-hover:bg-primary/50 transition-colors duration-500" 
+            />
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+              className="absolute -bottom-24 -left-24 w-64 h-64 bg-secondary/30 blur-[80px] rounded-full pointer-events-none group-hover:bg-secondary/50 transition-colors duration-500" 
+            />
             
             <div className="relative z-10 max-w-3xl mx-auto space-y-8">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Ready to start your channel?</h2>
-              <p className="text-xl text-muted-foreground">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight group-hover:text-primary transition-colors duration-300">Ready to start your channel?</h2>
+              <p className="text-xl text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                 Join thousands of creators using VidGen AI to automate their content production.
               </p>
               <Link to="/auth">
-                <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-foreground text-background hover:bg-foreground/90 shadow-xl transition-all hover:scale-105">
+                <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-foreground text-background hover:bg-primary hover:text-white shadow-xl transition-all hover:scale-105 hover:shadow-primary/50">
                   Get Started Now
                 </Button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
 
