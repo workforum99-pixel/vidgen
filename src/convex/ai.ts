@@ -1,8 +1,7 @@
+"use node";
 import { action } from "./_generated/server";
 import { v } from "convex/values";
-
-// This is where we will integrate the AI APIs.
-// Once you provide the keys, we can uncomment the logic below.
+import OpenAI from "openai";
 
 export const generateScript = action({
   args: { 
@@ -11,16 +10,49 @@ export const generateScript = action({
     tone: v.string() 
   },
   handler: async (ctx, args) => {
-    // Example implementation with OpenAI:
-    // const apiKey = process.env.OPENAI_API_KEY;
-    // if (!apiKey) throw new Error("OpenAI API Key not configured");
-    // const openai = new OpenAI({ apiKey });
-    // const completion = await openai.chat.completions.create({ ... });
+    const apiKey = process.env.OPENAI_API_KEY;
     
-    // Mock response for now
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    if (!apiKey) {
+      // Fallback to mock if no key is configured to prevent crashing for other users
+      // In a real app, you might want to throw an error:
+      // throw new Error("OpenAI API Key not configured");
+      console.warn("OpenAI API Key not found, returning mock response.");
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      return `[Title: ${args.topic}]\n\n[INTRO]\nHost: Welcome back! Today we are talking about ${args.topic}. It's going to be ${args.tone}!\n\n[BODY]\n1. First point about ${args.topic}...\n2. Second point...\n3. Third point...\n\n[OUTRO]\nThanks for watching! Don't forget to subscribe.`;
+    }
+
+    const openai = new OpenAI({ apiKey });
+
+    const prompt = `
+    You are a professional YouTube script writer.
+    Create a detailed, structured video script for a video about "${args.topic}".
     
-    return `[Title: ${args.topic}]\n\n[INTRO]\nHost: Welcome back! Today we are talking about ${args.topic}. It's going to be ${args.tone}!\n\n[BODY]\n1. First point about ${args.topic}...\n2. Second point...\n3. Third point...\n\n[OUTRO]\nThanks for watching! Don't forget to subscribe.`;
+    Video Length: ${args.length}
+    Tone: ${args.tone}
+    
+    The script should include:
+    - A catchy Title
+    - An engaging Intro (Hook)
+    - Body paragraphs with key points (broken down by timestamps if possible)
+    - A strong Outro (Call to Action)
+    
+    Format the output clearly with section headers.
+    `;
+
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          { role: "system", content: "You are a helpful assistant that writes engaging YouTube scripts." },
+          { role: "user", content: prompt }
+        ],
+      });
+
+      return completion.choices[0].message.content || "Failed to generate script.";
+    } catch (error: any) {
+      console.error("OpenAI API Error:", error);
+      throw new Error(`Failed to generate script: ${error.message}`);
+    }
   },
 });
 
