@@ -58,7 +58,7 @@ export function Sidebar({ className }: SidebarProps) {
                 className="w-full justify-start"
               >
                 <CreditCard className="mr-2 h-4 w-4" />
-                Billing
+                Pricing
               </Button>
             </Link>
           </div>
