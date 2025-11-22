@@ -7,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { toast } from "sonner";
 import { CreditCard, Download, FileText, ShieldCheck, Wallet, AlertCircle, CheckCircle2, Building, User, MapPin, Globe, Smartphone } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -168,10 +170,57 @@ export function BillingManagement() {
                 </div>
                 <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">Remove</Button>
               </div>
-              <Button variant="outline" className="w-full border-dashed">
-                <CreditCard className="mr-2 h-4 w-4" />
-                Add New Payment Method
-              </Button>
+              
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="w-full border-dashed">
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    Add New Payment Method
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Add Payment Method</DialogTitle>
+                    <DialogDescription>
+                      Add a new credit card or UPI ID to your account.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <Tabs defaultValue="card" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2">
+                      <TabsTrigger value="card">Card</TabsTrigger>
+                      <TabsTrigger value="upi">UPI</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="card" className="space-y-4 pt-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Cardholder Name</Label>
+                        <Input id="name" placeholder="John Doe" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="number">Card Number</Label>
+                        <Input id="number" placeholder="0000 0000 0000 0000" />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="expiry">Expiry Date</Label>
+                          <Input id="expiry" placeholder="MM/YY" />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="cvc">CVC</Label>
+                          <Input id="cvc" placeholder="123" />
+                        </div>
+                      </div>
+                      <Button className="w-full" onClick={() => toast.success("Card added successfully")}>Save Card</Button>
+                    </TabsContent>
+                    <TabsContent value="upi" className="space-y-4 pt-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="upi-id">UPI ID</Label>
+                        <Input id="upi-id" placeholder="username@bank" />
+                      </div>
+                      <Button className="w-full" onClick={() => toast.success("UPI ID added successfully")}>Verify & Save UPI</Button>
+                    </TabsContent>
+                  </Tabs>
+                </DialogContent>
+              </Dialog>
             </CardContent>
           </Card>
         </TabsContent>
