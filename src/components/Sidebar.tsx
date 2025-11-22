@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   BrainCircuit,
   CreditCard,
+  FileText,
   LayoutTemplate,
   LogOut,
   PlayCircle,
@@ -52,13 +53,22 @@ export function Sidebar({ className }: SidebarProps) {
                 My Videos
               </Button>
             </Link>
+            <Link to="/dashboard/pricing">
+              <Button
+                variant={isActive("/dashboard/pricing") ? "secondary" : "ghost"}
+                className="w-full justify-start"
+              >
+                <CreditCard className="mr-2 h-4 w-4" />
+                Pricing
+              </Button>
+            </Link>
             <Link to="/dashboard/billing">
               <Button
                 variant={isActive("/dashboard/billing") ? "secondary" : "ghost"}
                 className="w-full justify-start"
               >
-                <CreditCard className="mr-2 h-4 w-4" />
-                Pricing
+                <FileText className="mr-2 h-4 w-4" />
+                Billing
               </Button>
             </Link>
           </div>

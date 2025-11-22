@@ -39,6 +39,7 @@ import { toast } from "sonner";
 import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Billing } from "@/components/Billing";
+import { BillingManagement } from "@/components/BillingManagement";
 
 export default function Dashboard() {
   const { isAuthenticated, isLoading, user, signOut } = useAuth();
@@ -53,6 +54,7 @@ export default function Dashboard() {
 
   const isVideosPage = location.pathname.includes("/videos");
   const isSettingsPage = location.pathname.includes("/settings");
+  const isPricingPage = location.pathname.includes("/pricing");
   const isBillingPage = location.pathname.includes("/billing");
   
   const [currentStep, setCurrentStep] = useState(1);
@@ -247,8 +249,10 @@ export default function Dashboard() {
                 </CardContent>
               </Card>
             </div>
-          ) : isBillingPage ? (
+          ) : isPricingPage ? (
             <Billing />
+          ) : isBillingPage ? (
+            <BillingManagement />
           ) : (
             <>
               {/* Header */}
@@ -669,7 +673,7 @@ export default function Dashboard() {
           </div>
 
           {/* Navigation Buttons */}
-          {!isVideosPage && !isSettingsPage && !isBillingPage && (
+          {!isVideosPage && !isSettingsPage && !isPricingPage && !isBillingPage && (
             <div className="flex justify-between mt-8 pt-8 border-t">
               <Button
                 variant="outline"
