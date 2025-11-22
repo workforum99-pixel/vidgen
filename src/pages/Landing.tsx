@@ -2,11 +2,8 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, BrainCircuit, CheckCircle, Play, Sparkles, Video, Youtube, Wand2, Layers, Zap } from "lucide-react";
 import { Link } from "react-router";
-import { useAuth } from "@/hooks/use-auth";
 
 export default function Landing() {
-  const { isAuthenticated } = useAuth();
-
   return (
     <div className="min-h-screen bg-white text-foreground flex flex-col overflow-hidden selection:bg-primary/30">
       {/* Background Gradients */}
@@ -33,24 +30,14 @@ export default function Landing() {
           <span className="text-xl font-bold tracking-tight">VidGen AI</span>
         </div>
         <div className="flex items-center gap-4">
-          {isAuthenticated ? (
-            <Link to="/dashboard">
-              <Button className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:scale-105">
-                Go to Dashboard
-              </Button>
-            </Link>
-          ) : (
-            <>
-              <Link to="/auth">
-                <Button variant="ghost" className="hover:bg-primary/5">Sign In</Button>
-              </Link>
-              <Link to="/auth">
-                <Button className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:scale-105">
-                  Get Started
-                </Button>
-              </Link>
-            </>
-          )}
+          <Link to="/auth">
+            <Button variant="ghost" className="hover:bg-primary/5">Sign In</Button>
+          </Link>
+          <Link to="/auth">
+            <Button className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:scale-105">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </nav>
 
@@ -89,9 +76,9 @@ export default function Landing() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-              <Link to={isAuthenticated ? "/dashboard" : "/auth"}>
+              <Link to="/auth">
                 <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 shadow-xl shadow-primary/25 transition-all hover:scale-105">
-                  {isAuthenticated ? "Go to Dashboard" : "Start Creating"}
+                  Start Creating
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
@@ -257,9 +244,9 @@ export default function Landing() {
               <p className="text-xl text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                 Join thousands of creators using VidGen AI to automate their content production.
               </p>
-              <Link to={isAuthenticated ? "/dashboard" : "/auth"}>
+              <Link to="/auth">
                 <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-foreground text-background hover:bg-primary hover:text-white shadow-xl transition-all hover:scale-105 hover:shadow-primary/50">
-                  {isAuthenticated ? "Go to Dashboard" : "Get Started Now"}
+                  Get Started Now
                 </Button>
               </Link>
             </div>

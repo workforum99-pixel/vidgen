@@ -46,6 +46,15 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
     );
   }
 
+  // Prevent flash of content if already authenticated and redirecting
+  if (isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
   const handleEmailSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
