@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, BrainCircuit, CheckCircle, Play, Sparkles, Video, Youtube, Wand2, Layers, Zap } from "lucide-react";
 import { Link } from "react-router";
-import { useState, useEffect } from "react";
 
 export default function Landing() {
   return (
@@ -56,7 +55,7 @@ export default function Landing() {
             <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-balance leading-[1.1]">
               Create <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-secondary animate-gradient bg-300%">Viral Videos</span> <br/>
               <span className="relative inline-block">
-                in <Typewriter words={["Minutes", "a blink", "a click"]} />
+                in Minutes
                 <svg className="absolute w-full h-3 -bottom-1 left-0 text-secondary/50 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
                   <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
                 </svg>
@@ -240,38 +239,6 @@ export default function Landing() {
         </div>
       </footer>
     </div>
-  );
-}
-
-function Typewriter({ words }: { words: string[] }) {
-  const [index, setIndex] = useState(0);
-  const [text, setText] = useState(words[0]);
-  const [isDeleting, setIsDeleting] = useState(false);
-  
-  useEffect(() => {
-    const currentWord = words[index];
-    const typeSpeed = isDeleting ? 100 : 150;
-    const delay = isDeleting && text === "" ? 500 : (!isDeleting && text === currentWord ? 2000 : typeSpeed);
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting && text === currentWord) {
-        setIsDeleting(true);
-      } else if (isDeleting && text === "") {
-        setIsDeleting(false);
-        setIndex((prev) => (prev + 1) % words.length);
-      } else {
-        setText(currentWord.substring(0, isDeleting ? text.length - 1 : text.length + 1));
-      }
-    }, delay);
-
-    return () => clearTimeout(timeout);
-  }, [text, isDeleting, index, words]);
-
-  return (
-    <span>
-      {text}
-      <span className="animate-pulse ml-1 text-primary">|</span>
-    </span>
   );
 }
 
