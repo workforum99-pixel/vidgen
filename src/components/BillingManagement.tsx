@@ -355,34 +355,34 @@ export function BillingManagement() {
                   <Label>Full Name</Label>
                   <div className="relative">
                     <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input className="pl-9" defaultValue="Alex Creator" />
+                    <Input className="pl-9" placeholder="e.g. Alex Creator" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label>Email Address</Label>
                   <div className="relative">
                     <FileText className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input className="pl-9" defaultValue="alex@vidgen.ai" />
+                    <Input className="pl-9" placeholder="e.g. alex@vidgen.ai" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label>Address</Label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input className="pl-9" defaultValue="123 Creator St" />
+                    <Input className="pl-9" placeholder="e.g. 123 Creator St" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label>City</Label>
-                  <Input defaultValue="San Francisco" />
+                  <Input placeholder="e.g. San Francisco" />
                 </div>
                 <div className="space-y-2">
                   <Label>State / Province</Label>
-                  <Input defaultValue="CA" />
+                  <Input placeholder="e.g. CA" />
                 </div>
                 <div className="space-y-2">
                   <Label>Postal Code</Label>
-                  <Input defaultValue="94105" />
+                  <Input placeholder="e.g. 94105" />
                 </div>
                 <div className="space-y-2">
                   <Label>Country</Label>
