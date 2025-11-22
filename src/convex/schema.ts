@@ -38,6 +38,9 @@ const schema = defineSchema(
       status: v.string(), // "draft", "generating", "completed", "published"
       step: v.number(), // 1-5
       
+      // New Field for Template/Reference
+      referenceVideoUrl: v.optional(v.string()),
+
       // Step 1 Data
       idea: v.optional(v.string()),
       script: v.optional(v.string()),

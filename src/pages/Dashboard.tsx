@@ -33,6 +33,7 @@ import { useAuth } from "@/hooks/use-auth";
 export default function Dashboard() {
   const { isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -40,8 +41,8 @@ export default function Dashboard() {
     }
   }, [isLoading, isAuthenticated, navigate]);
 
-  const location = useLocation();
   const isVideosPage = location.pathname.includes("/videos");
+  const isTemplatesPage = location.pathname.includes("/templates");
   
   const [currentStep, setCurrentStep] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -51,6 +52,17 @@ export default function Dashboard() {
   const [script, setScript] = useState("");
   const [videoLength, setVideoLength] = useState("medium");
   const [tone, setTone] = useState("engaging");
+
+  // Check for template data from navigation
+  useEffect(() => {
+    if (location.state?.referenceUrl && !idea) {
+      toast.success("Style adapted from reference video!", {
+        description: "We've analyzed the video and set the tone for you."
+      });
+      setIdea(`Video inspired by: ${location.state.referenceUrl}`);
+      setTone("engaging"); // Mock adaptation
+    }
+  }, [location.state]);
   
   // Mock generation functions
   const handleGenerateScript = async () => {
@@ -72,6 +84,22 @@ export default function Dashboard() {
 
   const handlePrevStep = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
+  };
+
+  // Template Page Logic
+  const [templateUrl, setTemplateUrl] = useState("");
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const handleAnalyzeTemplate = async () => {
+    if (!templateUrl) {
+      toast.error("Please enter a YouTube URL");
+      return;
+    }
+    setIsAnalyzing(true);
+    // Simulate analysis
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setIsAnalyzing(false);
+    navigate("/dashboard", { state: { referenceUrl: templateUrl } });
   };
 
   if (isLoading) {
@@ -109,6 +137,84 @@ export default function Dashboard() {
                   </Card>
                 ))}
               </div>
+            </div>
+          ) : isTemplatesPage ? (
+            <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="mb-8 space-y-4 text-center">
+                <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">
+                  Create from Reference
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                  Paste a YouTube video link, and our AI will analyze its pacing, tone, and style to create a similar video for you.
+                </p>
+              </div>
+
+              <Card className="border-2 border-primary/10 shadow-2xl shadow-primary/5 overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-purple-500 to-secondary" />
+                <CardHeader className="text-center pb-2">
+                  <div className="mx-auto w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                    <Youtube className="w-8 h-8 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Import Style from YouTube</CardTitle>
+                  <CardDescription>
+                    We'll extract the "scent" of the video to match your new creation.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6 p-8">
+                  <div className="space-y-2">
+                    <Label htmlFor="url" className="text-base">YouTube Video URL</Label>
+                    <div className="relative">
+                      <Youtube className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+                      <Input 
+                        id="url" 
+                        placeholder="https://www.youtube.com/watch?v=..." 
+                        className="pl-10 h-12 text-lg"
+                        value={templateUrl}
+                        onChange={(e) => setTemplateUrl(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="bg-muted/30 rounded-xl p-6 border border-border/50">
+                    <h3 className="font-semibold mb-4 flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-yellow-500" />
+                      What we analyze:
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {[
+                        { icon: Mic, label: "Voice & Tone", desc: "Pacing, emotion, and delivery style" },
+                        { icon: Film, label: "Visual Pacing", desc: "Cut frequency and transition types" },
+                        { icon: Music, label: "Audio Vibe", desc: "Background music and sound design" },
+                      ].map((item, i) => (
+                        <div key={i} className="flex flex-col items-center text-center p-3 bg-background rounded-lg border shadow-sm">
+                          <item.icon className="w-6 h-6 text-primary mb-2" />
+                          <span className="font-medium text-sm">{item.label}</span>
+                          <span className="text-xs text-muted-foreground mt-1">{item.desc}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Button 
+                    size="lg" 
+                    className="w-full h-14 text-lg font-semibold shadow-lg shadow-primary/20"
+                    onClick={handleAnalyzeTemplate}
+                    disabled={isAnalyzing}
+                  >
+                    {isAnalyzing ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Analyzing Video Style...
+                      </>
+                    ) : (
+                      <>
+                        <Wand2 className="mr-2 h-5 w-5" />
+                        Analyze & Create Project
+                      </>
+                    )}
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           ) : (
             <>
@@ -459,7 +565,7 @@ export default function Dashboard() {
           </div>
 
           {/* Navigation Buttons */}
-          {!isVideosPage && (
+          {!isVideosPage && !isTemplatesPage && (
             <div className="flex justify-between mt-8 pt-8 border-t">
               <Button
                 variant="outline"
