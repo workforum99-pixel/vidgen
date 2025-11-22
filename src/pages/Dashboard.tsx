@@ -1,3 +1,31 @@
+import { useMutation, useQuery, useAction } from "convex/react";
+import {
+=======
+  const generateScript = useAction(api.ai.generateScript);
+
+  const handleGenerateScript = async () => {
+    if (!idea) {
+      toast.error("Please enter a video topic or idea.");
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      const result = await generateScript({
+        topic: idea,
+        length: videoLength || "medium",
+        tone: tone
+      });
+      setScript(result);
+      toast.success("Script generated successfully!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to generate script. Please try again.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+import {
+=======
 import { Sidebar } from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +36,35 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/convex/_generated/api";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery, useAction } from "convex/react";
+import {
+=======
+import { useMutation, useQuery, useAction } from "convex/react";
+import {
+=======
+  const generateScript = useAction(api.ai.generateScript);
+
+  const handleGenerateScript = async () => {
+    if (!idea) {
+      toast.error("Please enter a video topic or idea.");
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      const result = await generateScript({
+        topic: idea,
+        length: videoLength || "medium",
+        tone: tone
+      });
+      setScript(result);
+      toast.success("Script generated successfully!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to generate script. Please try again.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 import {
   CheckCircle2,
   ChevronRight,
@@ -100,17 +156,28 @@ export default function Dashboard() {
   }, [location.state]);
   
   // Mock generation functions
+  const generateScript = useAction(api.ai.generateScript);
+
   const handleGenerateScript = async () => {
     if (!idea) {
       toast.error("Please enter a video topic or idea.");
       return;
     }
     setIsGenerating(true);
-    // Simulate AI delay
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setScript(`[INTRO]\nHost: Welcome back to the channel! Today we're diving into ${idea}.\n\n[BODY]\nHere are the key points you need to know...\n\n[OUTRO]\nDon't forget to like and subscribe!`);
-    setIsGenerating(false);
-    toast.success("Script generated successfully!");
+    try {
+      const result = await generateScript({
+        topic: idea,
+        length: videoLength || "medium",
+        tone: tone
+      });
+      setScript(result);
+      toast.success("Script generated successfully!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to generate script. Please try again.");
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   const handleNextStep = () => {
