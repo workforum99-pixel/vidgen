@@ -29,7 +29,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/use-auth";
-import { motion } from "framer-motion";
 
 export default function Dashboard() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -116,15 +115,9 @@ export default function Dashboard() {
               {/* Header */}
               <div className="flex items-center justify-between mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
                 <div className="space-y-2">
-                  <motion.h1 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                    className="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent animate-gradient bg-300% pb-1 cursor-default"
-                  >
+                  <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent animate-gradient bg-300% pb-1">
                     Think, Create & Publish
-                  </motion.h1>
+                  </h1>
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-yellow-500 animate-pulse" />
                     <p className="text-xl font-medium text-muted-foreground/80">
