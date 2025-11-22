@@ -391,10 +391,25 @@ export function BillingManagement() {
                       <SelectValue placeholder="Select country" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="us">United States</SelectItem>
-                      <SelectItem value="ca">Canada</SelectItem>
-                      <SelectItem value="uk">United Kingdom</SelectItem>
-                      <SelectItem value="au">Australia</SelectItem>
+                      <SelectItem value="us">United States (+1)</SelectItem>
+                      <SelectItem value="uk">United Kingdom (+44)</SelectItem>
+                      <SelectItem value="ca">Canada (+1)</SelectItem>
+                      <SelectItem value="au">Australia (+61)</SelectItem>
+                      <SelectItem value="in">India (+91)</SelectItem>
+                      <SelectItem value="de">Germany (+49)</SelectItem>
+                      <SelectItem value="fr">France (+33)</SelectItem>
+                      <SelectItem value="jp">Japan (+81)</SelectItem>
+                      <SelectItem value="cn">China (+86)</SelectItem>
+                      <SelectItem value="br">Brazil (+55)</SelectItem>
+                      <SelectItem value="mx">Mexico (+52)</SelectItem>
+                      <SelectItem value="za">South Africa (+27)</SelectItem>
+                      <SelectItem value="it">Italy (+39)</SelectItem>
+                      <SelectItem value="es">Spain (+34)</SelectItem>
+                      <SelectItem value="nl">Netherlands (+31)</SelectItem>
+                      <SelectItem value="se">Sweden (+46)</SelectItem>
+                      <SelectItem value="ch">Switzerland (+41)</SelectItem>
+                      <SelectItem value="ae">United Arab Emirates (+971)</SelectItem>
+                      <SelectItem value="sg">Singapore (+65)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
