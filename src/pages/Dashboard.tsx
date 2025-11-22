@@ -452,6 +452,8 @@ export default function Dashboard() {
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="cinematic">Cinematic</SelectItem>
+                                <SelectItem value="documentary">Documentary</SelectItem>
+                                <SelectItem value="instrumental">Instrumental</SelectItem>
                                 <SelectItem value="lofi">Lo-Fi / Chill</SelectItem>
                                 <SelectItem value="upbeat">Upbeat / Corporate</SelectItem>
                                 <SelectItem value="none">None</SelectItem>
