@@ -84,12 +84,11 @@ export function Sidebar({ className }: SidebarProps) {
             </Link>
           </div>
         </div>
-        
         <div className="px-3 py-2 mt-auto">
           <h2 className="mb-2 px-4 text-xs font-semibold tracking-tight text-muted-foreground">
             Support
           </h2>
-          <div className="space-y-1">
+          <div className="space-y-1 mb-4">
             <Link to="/dashboard/faq">
               <Button
                 variant={isActive("/dashboard/faq") ? "secondary" : "ghost"}
@@ -100,8 +99,7 @@ export function Sidebar({ className }: SidebarProps) {
               </Button>
             </Link>
           </div>
-          
-          <h2 className="mb-2 px-4 text-xs font-semibold tracking-tight text-muted-foreground mt-4">
+          <h2 className="mb-2 px-4 text-xs font-semibold tracking-tight text-muted-foreground">
             Settings
           </h2>
           <div className="space-y-1">
