@@ -128,14 +128,16 @@ export default function Dashboard() {
               </div>
 
               {/* Progress Tracker */}
-              <div className="mb-12">
-                <div className="relative flex justify-between">
+              <div className="mb-12 px-4">
+                <div className="relative flex justify-between items-center">
                   {/* Background Track (Dotted) */}
-                  <div className="absolute top-5 left-0 w-full h-0.5 border-t-2 border-dotted border-muted-foreground/30 -z-20 -translate-y-1/2" />
+                  <div className="absolute top-5 left-0 w-full h-0.5 -translate-y-1/2 z-0">
+                     <div className="w-full h-full border-t-2 border-dotted border-muted-foreground/30" />
+                  </div>
                   
                   {/* Progress Line (Solid) */}
                   <div 
-                    className="absolute top-5 left-0 h-1 bg-primary -z-10 -translate-y-1/2 transition-all duration-500 ease-in-out origin-left"
+                    className="absolute top-5 left-0 h-1 bg-primary -translate-y-1/2 transition-all duration-500 ease-in-out origin-left z-0"
                     style={{ width: `${((currentStep - 1) / 4) * 100}%` }}
                   />
 
@@ -146,12 +148,12 @@ export default function Dashboard() {
                     { id: 4, label: "Thumbnail", icon: ImageIcon },
                     { id: 5, label: "Publish", icon: Youtube },
                   ].map((step) => (
-                    <div key={step.id} className="flex flex-col items-center gap-2 z-10">
+                    <div key={step.id} className="relative flex flex-col items-center gap-2 z-10">
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                           currentStep >= step.id
                             ? "bg-primary border-primary text-primary-foreground shadow-lg shadow-primary/40 scale-110"
-                            : "bg-muted border-muted-foreground/30 text-muted-foreground"
+                            : "bg-muted border-muted-foreground/30 text-muted-foreground bg-background"
                         }`}
                       >
                         {currentStep > step.id ? (
