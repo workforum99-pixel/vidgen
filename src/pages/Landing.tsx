@@ -173,21 +173,27 @@ export default function Landing() {
                       title: "AI Script Writing", 
                       desc: "Generate engaging scripts from a single topic or keyword instantly.",
                       color: "text-blue-500",
-                      bg: "bg-blue-500/10"
+                      bg: "bg-blue-500/10",
+                      border: "border-blue-500/20",
+                      shadow: "shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.5)]"
                     },
                     { 
                       icon: Video, 
                       title: "Auto-Visuals", 
                       desc: "Automatically match stock footage and animations to your script.",
                       color: "text-purple-500",
-                      bg: "bg-purple-500/10"
+                      bg: "bg-purple-500/10",
+                      border: "border-purple-500/20",
+                      shadow: "shadow-[0_0_30px_-10px_rgba(168,85,247,0.3)] hover:shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)]"
                     },
                     { 
                       icon: Zap, 
                       title: "One-Click Publish", 
                       desc: "Seamlessly upload to YouTube with optimized titles and tags.",
                       color: "text-yellow-500",
-                      bg: "bg-yellow-500/10"
+                      bg: "bg-yellow-500/10",
+                      border: "border-yellow-500/20",
+                      shadow: "shadow-[0_0_30px_-10px_rgba(234,179,8,0.3)] hover:shadow-[0_0_40px_-10px_rgba(234,179,8,0.5)]"
                     }
                 ].map((feature, i) => (
                     <motion.div 
@@ -197,7 +203,7 @@ export default function Landing() {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.2 }}
                       whileHover={{ y: -10 }}
-                      className="p-8 rounded-3xl border border-white/5 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all hover:shadow-2xl hover:shadow-primary/5 group"
+                      className={`p-8 rounded-3xl border ${feature.border} bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all ${feature.shadow} group ring-1 ring-black/40`}
                     >
                         <div className={`h-14 w-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
                             <feature.icon className="h-7 w-7" />
