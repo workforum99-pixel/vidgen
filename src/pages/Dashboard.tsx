@@ -40,6 +40,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Billing } from "@/components/Billing";
 import { BillingManagement } from "@/components/BillingManagement";
+import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
 
 export default function Dashboard() {
   const { isAuthenticated, isLoading, user, signOut } = useAuth();
@@ -56,6 +57,7 @@ export default function Dashboard() {
   const isSettingsPage = location.pathname.includes("/settings");
   const isPricingPage = location.pathname.includes("/pricing");
   const isBillingPage = location.pathname.includes("/billing");
+  const isAnalyticsPage = location.pathname.includes("/analytics");
   
   const [currentStep, setCurrentStep] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -253,6 +255,8 @@ export default function Dashboard() {
             <Billing />
           ) : isBillingPage ? (
             <BillingManagement />
+          ) : isAnalyticsPage ? (
+            <AnalyticsDashboard />
           ) : (
             <>
               {/* Header */}
@@ -673,7 +677,7 @@ export default function Dashboard() {
           </div>
 
           {/* Navigation Buttons */}
-          {!isVideosPage && !isSettingsPage && !isPricingPage && !isBillingPage && (
+          {!isVideosPage && !isSettingsPage && !isPricingPage && !isBillingPage && !isAnalyticsPage && (
             <div className="flex justify-between mt-8 pt-8 border-t">
               <Button
                 variant="outline"

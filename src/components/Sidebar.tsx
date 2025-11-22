@@ -12,6 +12,7 @@ import {
   Settings,
   User,
   Video,
+  BarChart3,
 } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useAuth } from "@/hooks/use-auth";
@@ -51,6 +52,15 @@ export function Sidebar({ className }: SidebarProps) {
               >
                 <Video className="mr-2 h-4 w-4" />
                 My Videos
+              </Button>
+            </Link>
+            <Link to="/dashboard/analytics">
+              <Button
+                variant={isActive("/dashboard/analytics") ? "secondary" : "ghost"}
+                className="w-full justify-start"
+              >
+                <BarChart3 className="mr-2 h-4 w-4" />
+                Analytics
               </Button>
             </Link>
             <Link to="/dashboard/pricing">
