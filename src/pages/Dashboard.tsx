@@ -116,9 +116,14 @@ export default function Dashboard() {
       });
       setScript(result);
       toast.success("Script generated successfully!");
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error("Failed to generate script. Please try again.");
+      const errorMessage = error.message || "Failed to generate script. Please try again.";
+      // Clean up Convex error prefix if present
+      const cleanMessage = errorMessage.includes("Uncaught Error: ") 
+        ? errorMessage.split("Uncaught Error: ")[1] 
+        : errorMessage;
+      toast.error(cleanMessage);
     } finally {
       setIsGenerating(false);
     }
