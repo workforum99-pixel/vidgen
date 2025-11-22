@@ -27,8 +27,8 @@ export function Sidebar({ className }: SidebarProps) {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className={cn("pb-12 w-64 border-r bg-sidebar text-sidebar-foreground hidden md:flex md:flex-col", className)}>
-      <div className="space-y-4 py-4 flex-1 flex flex-col">
+    <div className={cn("w-64 border-r bg-sidebar text-sidebar-foreground hidden md:flex md:flex-col", className)}>
+      <div className="space-y-4 py-4 flex-1 flex flex-col h-full">
         <div className="px-3 py-2">
           <div className="flex items-center gap-2 px-4 mb-8">
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
