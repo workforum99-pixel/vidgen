@@ -284,18 +284,18 @@ export default function Dashboard() {
               <div className="min-h-[400px]">
                 {currentStep === 1 && (
               <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <Card>
+                <Card className="border-2 border-primary/20 shadow-md">
                   <CardHeader>
-                    <CardTitle>Step 1: Idea & Script</CardTitle>
+                    <CardTitle className="text-2xl">Step 1: Idea & Script</CardTitle>
                     <CardDescription>Start by describing your video idea, and our AI will write the script for you.</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="space-y-2">
-                      <Label htmlFor="idea">Your Video Topic/Idea</Label>
+                      <Label htmlFor="idea" className="text-base font-semibold">Your Video Topic/Idea</Label>
                       <Textarea
                         id="idea"
                         placeholder="e.g., The rise of faceless YouTube channels in 2025"
-                        className="min-h-[100px] text-lg"
+                        className="min-h-[100px] text-lg border-foreground/20 bg-muted/5"
                         value={idea}
                         onChange={(e) => setIdea(e.target.value)}
                       />
@@ -303,9 +303,9 @@ export default function Dashboard() {
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="space-y-2">
-                        <Label>Video Length</Label>
+                        <Label className="text-base font-semibold">Video Length</Label>
                         <Select value={videoLength} onValueChange={setVideoLength}>
-                          <SelectTrigger>
+                          <SelectTrigger className="border-foreground/20 bg-muted/5">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -316,9 +316,9 @@ export default function Dashboard() {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label>Tone</Label>
+                        <Label className="text-base font-semibold">Tone</Label>
                         <Select value={tone} onValueChange={setTone}>
-                          <SelectTrigger>
+                          <SelectTrigger className="border-foreground/20 bg-muted/5">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -330,8 +330,8 @@ export default function Dashboard() {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label>Keywords (Optional)</Label>
-                        <Input placeholder="AI, Tech, Future" />
+                        <Label className="text-base font-semibold">Keywords (Optional)</Label>
+                        <Input placeholder="AI, Tech, Future" className="border-foreground/20 bg-muted/5" />
                       </div>
                     </div>
 
@@ -357,13 +357,13 @@ export default function Dashboard() {
                     ) : (
                       <div className="space-y-4 pt-4 border-t">
                         <div className="flex items-center justify-between">
-                          <Label>AI Generated Script</Label>
+                          <Label className="text-base font-semibold">AI Generated Script</Label>
                           <Button variant="ghost" size="sm" onClick={() => setScript("")}>Regenerate</Button>
                         </div>
                         <Textarea 
                           value={script} 
                           onChange={(e) => setScript(e.target.value)} 
-                          className="min-h-[200px] font-mono text-sm"
+                          className="min-h-[200px] font-mono text-sm border-foreground/20 bg-muted/5"
                         />
                       </div>
                     )}
@@ -374,18 +374,18 @@ export default function Dashboard() {
 
             {currentStep === 2 && (
               <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <Card>
+                <Card className="border-2 border-primary/20 shadow-md">
                   <CardHeader>
-                    <CardTitle>Step 2: Voice & Sound</CardTitle>
+                    <CardTitle className="text-2xl">Step 2: Voice & Sound</CardTitle>
                     <CardDescription>Choose a voice for your video and set the background ambiance.</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <Label>Select Voice</Label>
+                        <Label className="text-base font-semibold">Select Voice</Label>
                         <div className="grid grid-cols-1 gap-3">
                           {["Adam (Male - Deep)", "Bella (Female - Cheerful)", "Clone My Voice (Premium)"].map((voice, i) => (
-                            <div key={i} className="flex items-center justify-between p-3 border rounded-lg hover:border-primary cursor-pointer transition-colors">
+                            <div key={i} className="flex items-center justify-between p-3 border border-foreground/20 rounded-lg hover:border-primary cursor-pointer transition-colors bg-muted/5">
                               <div className="flex items-center gap-3">
                                 <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                                   <Play className="h-4 w-4" />
@@ -398,12 +398,12 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div className="space-y-4">
-                        <Label>Background Audio</Label>
+                        <Label className="text-base font-semibold">Background Audio</Label>
                         <div className="space-y-4">
                           <div className="space-y-2">
-                            <Label className="text-xs text-muted-foreground">Music Style</Label>
+                            <Label className="text-sm text-muted-foreground">Music Style</Label>
                             <Select defaultValue="cinematic">
-                              <SelectTrigger>
+                              <SelectTrigger className="border-foreground/20 bg-muted/5">
                                 <SelectValue />
                               </SelectTrigger>
                               <SelectContent>
@@ -414,7 +414,7 @@ export default function Dashboard() {
                               </SelectContent>
                             </Select>
                           </div>
-                          <div className="flex items-center justify-between p-3 border rounded-lg">
+                          <div className="flex items-center justify-between p-3 border border-foreground/20 rounded-lg bg-muted/5">
                             <div className="flex items-center gap-2">
                               <Music className="h-4 w-4 text-muted-foreground" />
                               <span className="text-sm font-medium">Sound Effects</span>
@@ -435,9 +435,9 @@ export default function Dashboard() {
 
             {currentStep === 3 && (
               <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <Card>
+                <Card className="border-2 border-primary/20 shadow-md">
                   <CardHeader>
-                    <CardTitle>Step 3: Visuals & Editing</CardTitle>
+                    <CardTitle className="text-2xl">Step 3: Visuals & Editing</CardTitle>
                     <CardDescription>Define the visual style and generate your video.</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -447,7 +447,7 @@ export default function Dashboard() {
                         { title: "Animated", desc: "2D vector explainer style" },
                         { title: "Minimal", desc: "Clean text & icons" },
                       ].map((style, i) => (
-                        <div key={i} className="p-4 border rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center space-y-2">
+                        <div key={i} className="p-4 border border-foreground/20 rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center space-y-2 bg-muted/5">
                           <div className="h-24 bg-muted rounded-lg mb-2 w-full" />
                           <h3 className="font-semibold">{style.title}</h3>
                           <p className="text-xs text-muted-foreground">{style.desc}</p>
@@ -455,15 +455,15 @@ export default function Dashboard() {
                       ))}
                     </div>
                     
-                    <div className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
+                    <div className="flex items-center justify-between p-4 border border-foreground/20 rounded-lg bg-muted/30">
                       <div className="space-y-0.5">
-                        <Label className="text-base">Dynamic Subtitles</Label>
+                        <Label className="text-base font-semibold">Dynamic Subtitles</Label>
                         <p className="text-sm text-muted-foreground">Automatically generate and overlay captions</p>
                       </div>
                       <Switch defaultChecked />
                     </div>
 
-                    <div className="aspect-video bg-black rounded-xl flex items-center justify-center relative overflow-hidden group">
+                    <div className="aspect-video bg-black rounded-xl flex items-center justify-center relative overflow-hidden group border border-foreground/20">
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                         <p className="text-white font-medium">Preview not generated yet</p>
                       </div>
@@ -479,16 +479,16 @@ export default function Dashboard() {
 
             {currentStep === 4 && (
               <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <Card>
+                <Card className="border-2 border-primary/20 shadow-md">
                   <CardHeader>
-                    <CardTitle>Step 4: Thumbnail Design</CardTitle>
+                    <CardTitle className="text-2xl">Step 4: Thumbnail Design</CardTitle>
                     <CardDescription>Create an eye-catching thumbnail for your video.</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="space-y-2">
-                      <Label>Thumbnail Description</Label>
+                      <Label className="text-base font-semibold">Thumbnail Description</Label>
                       <div className="flex gap-2">
-                        <Input placeholder="e.g., Man sitting in front of cash pile with a robot hand" />
+                        <Input placeholder="e.g., Man sitting in front of cash pile with a robot hand" className="border-foreground/20 bg-muted/5" />
                         <Button>Generate</Button>
                       </div>
                     </div>
@@ -507,24 +507,24 @@ export default function Dashboard() {
 
             {currentStep === 5 && (
               <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <Card>
+                <Card className="border-2 border-primary/20 shadow-md">
                   <CardHeader>
-                    <CardTitle>Step 5: Publish</CardTitle>
+                    <CardTitle className="text-2xl">Step 5: Publish</CardTitle>
                     <CardDescription>Optimize your video for SEO and publish to YouTube.</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label>Optimized Title</Label>
-                        <Input defaultValue="The Future of YouTube: Faceless Channels Explained (2025)" />
+                        <Label className="text-base font-semibold">Optimized Title</Label>
+                        <Input defaultValue="The Future of YouTube: Faceless Channels Explained (2025)" className="border-foreground/20 bg-muted/5" />
                       </div>
                       <div className="space-y-2">
-                        <Label>Description</Label>
-                        <Textarea className="min-h-[100px]" defaultValue="In this video, we explore the rising trend of faceless YouTube channels..." />
+                        <Label className="text-base font-semibold">Description</Label>
+                        <Textarea className="min-h-[100px] border-foreground/20 bg-muted/5" defaultValue="In this video, we explore the rising trend of faceless YouTube channels..." />
                       </div>
                       <div className="space-y-2">
-                        <Label>Tags</Label>
-                        <Input defaultValue="#YouTube #AI #ContentCreation #2025" />
+                        <Label className="text-base font-semibold">Tags</Label>
+                        <Input defaultValue="#YouTube #AI #ContentCreation #2025" className="border-foreground/20 bg-muted/5" />
                       </div>
                     </div>
 
@@ -532,17 +532,17 @@ export default function Dashboard() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label>YouTube Channel</Label>
+                        <Label className="text-base font-semibold">YouTube Channel</Label>
                         <Select disabled>
-                          <SelectTrigger>
+                          <SelectTrigger className="border-foreground/20 bg-muted/5">
                             <SelectValue placeholder="Connect Account in Settings" />
                           </SelectTrigger>
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label>Privacy Status</Label>
+                        <Label className="text-base font-semibold">Privacy Status</Label>
                         <Select defaultValue="private">
-                          <SelectTrigger>
+                          <SelectTrigger className="border-foreground/20 bg-muted/5">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
