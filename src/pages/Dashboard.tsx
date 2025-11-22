@@ -25,11 +25,21 @@ import {
   Wand2,
   Youtube,
 } from "lucide-react";
-import { useState } from "react";
-import { useLocation } from "react-router";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function Dashboard() {
+  const { isAuthenticated, isLoading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      navigate("/auth");
+    }
+  }, [isLoading, isAuthenticated, navigate]);
+
   const location = useLocation();
   const isVideosPage = location.pathname.includes("/videos");
   
@@ -63,6 +73,18 @@ export default function Dashboard() {
   const handlePrevStep = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return null; // Will redirect via useEffect
+  }
 
   return (
     <div className="flex min-h-screen bg-background">
