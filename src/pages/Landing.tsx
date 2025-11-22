@@ -78,7 +78,7 @@ export default function Landing() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
               <Link to="/auth">
                 <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 shadow-xl shadow-primary/25 transition-all hover:scale-105">
-                  Start Creating for Free
+                  Start Creating
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
