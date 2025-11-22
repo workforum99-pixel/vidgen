@@ -25,6 +25,9 @@ import {
   Wand2,
   Youtube,
   X,
+  Clapperboard,
+  PenTool,
+  Bot,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
@@ -489,14 +492,16 @@ export default function Dashboard() {
                   <CardContent className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {[
-                        { title: "Stock Footage", desc: "Cinematic real-world clips" },
-                        { title: "Animated", desc: "2D vector explainer style" },
-                        { title: "Minimal", desc: "Clean text & icons" },
+                        { title: "Stock Footage", desc: "Cinematic real-world clips", icon: Clapperboard },
+                        { title: "Animated", desc: "2D vector explainer style", icon: PenTool },
+                        { title: "AI Generated", desc: "AI Video model", icon: Bot },
                       ].map((style, i) => (
-                        <div key={i} className="p-4 border border-foreground/20 rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center space-y-2 bg-muted/5">
-                          <div className="h-24 bg-muted rounded-lg mb-2 w-full" />
-                          <h3 className="font-semibold">{style.title}</h3>
-                          <p className="text-xs text-muted-foreground">{style.desc}</p>
+                        <div key={i} className="p-4 border border-foreground/20 rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center space-y-2 bg-muted/5 flex flex-col items-center justify-center h-48">
+                          <div className="h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center mb-4 shadow-inner">
+                            <style.icon className="h-10 w-10 text-primary" />
+                          </div>
+                          <h3 className="font-semibold text-lg">{style.title}</h3>
+                          <p className="text-sm text-muted-foreground">{style.desc}</p>
                         </div>
                       ))}
                     </div>
@@ -507,16 +512,6 @@ export default function Dashboard() {
                         <p className="text-sm text-muted-foreground">Automatically generate and overlay captions</p>
                       </div>
                       <Switch defaultChecked />
-                    </div>
-
-                    <div className="aspect-video bg-black rounded-xl flex items-center justify-center relative overflow-hidden group border border-foreground/20">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                        <p className="text-white font-medium">Preview not generated yet</p>
-                      </div>
-                      <Button variant="secondary" size="lg" className="z-10">
-                        <Play className="mr-2 h-5 w-5" />
-                        Generate Preview
-                      </Button>
                     </div>
                   </CardContent>
                 </Card>
