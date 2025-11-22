@@ -24,6 +24,7 @@ import {
   Upload,
   Wand2,
   Youtube,
+  X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
@@ -51,6 +52,7 @@ export default function Dashboard() {
   const [idea, setIdea] = useState("");
   const [script, setScript] = useState("");
   const [videoLength, setVideoLength] = useState("medium");
+  const [isCustomLength, setIsCustomLength] = useState(false);
   const [tone, setTone] = useState("engaging");
 
   // Check for template data from navigation
@@ -304,16 +306,50 @@ export default function Dashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="space-y-2">
                         <Label className="text-base font-semibold">Video Length</Label>
-                        <Select value={videoLength} onValueChange={setVideoLength}>
-                          <SelectTrigger className="border-foreground/20 bg-muted/5">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="short">Short (Under 1 min)</SelectItem>
-                            <SelectItem value="medium">Medium (1-5 mins)</SelectItem>
-                            <SelectItem value="long">Long (5+ mins)</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        {isCustomLength ? (
+                          <div className="relative">
+                            <Input
+                              value={videoLength}
+                              onChange={(e) => setVideoLength(e.target.value)}
+                              placeholder="e.g., 10 minutes"
+                              className="border-foreground/20 bg-muted/5 pr-10"
+                              autoFocus
+                            />
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="absolute right-1 top-1 h-8 w-8 text-muted-foreground hover:text-foreground"
+                              onClick={() => {
+                                setIsCustomLength(false);
+                                setVideoLength("medium");
+                              }}
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        ) : (
+                          <Select
+                            value={videoLength}
+                            onValueChange={(val) => {
+                              if (val === "custom") {
+                                setIsCustomLength(true);
+                                setVideoLength("");
+                              } else {
+                                setVideoLength(val);
+                              }
+                            }}
+                          >
+                            <SelectTrigger className="border-foreground/20 bg-muted/5">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="short">Short (Under 1 min)</SelectItem>
+                              <SelectItem value="medium">Medium (1-5 mins)</SelectItem>
+                              <SelectItem value="long">Long (5+ mins)</SelectItem>
+                              <SelectItem value="custom">Custom</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        )}
                       </div>
                       <div className="space-y-2">
                         <Label className="text-base font-semibold">Tone</Label>
