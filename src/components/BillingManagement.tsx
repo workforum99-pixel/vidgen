@@ -52,35 +52,15 @@ export function BillingManagement() {
                 </div>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-3">
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">Credits Remaining</CardTitle>
-                  </CardHeader>
-                  <CardContent>
+              <Card className="bg-primary/5 border-primary/20">
+                <div className="flex flex-row items-center justify-between p-6">
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-medium text-muted-foreground">Credits Remaining</h3>
                     <div className="text-2xl font-bold">34 / 50</div>
-                    <p className="text-xs text-muted-foreground mt-1">Resets in 12 days</p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">Storage Used</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">12.4 GB</div>
-                    <p className="text-xs text-muted-foreground mt-1">of 100 GB limit</p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">Team Seats</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">2 / 5</div>
-                    <p className="text-xs text-muted-foreground mt-1">Active members</p>
-                  </CardContent>
-                </Card>
-              </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Resets in 12 days</p>
+                </div>
+              </Card>
             </CardContent>
           </Card>
 
