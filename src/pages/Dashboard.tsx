@@ -130,7 +130,15 @@ export default function Dashboard() {
               {/* Progress Tracker */}
               <div className="mb-12">
                 <div className="relative flex justify-between">
-                  <div className="absolute top-1/2 left-0 w-full h-1 bg-muted -z-10 -translate-y-1/2" />
+                  {/* Background Track (Dotted) */}
+                  <div className="absolute top-5 left-0 w-full h-0.5 border-t-2 border-dotted border-muted-foreground/30 -z-20 -translate-y-1/2" />
+                  
+                  {/* Progress Line (Solid) */}
+                  <div 
+                    className="absolute top-5 left-0 h-1 bg-primary -z-10 -translate-y-1/2 transition-all duration-500 ease-in-out origin-left"
+                    style={{ width: `${((currentStep - 1) / 4) * 100}%` }}
+                  />
+
                   {[
                     { id: 1, label: "Idea & Script", icon: Sparkles },
                     { id: 2, label: "Voice & Sound", icon: Mic },
@@ -138,11 +146,11 @@ export default function Dashboard() {
                     { id: 4, label: "Thumbnail", icon: ImageIcon },
                     { id: 5, label: "Publish", icon: Youtube },
                   ].map((step) => (
-                    <div key={step.id} className="flex flex-col items-center gap-2 bg-background px-2">
+                    <div key={step.id} className="flex flex-col items-center gap-2 z-10">
                       <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors ${
+                        className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                           currentStep >= step.id
-                            ? "bg-primary border-primary text-primary-foreground"
+                            ? "bg-primary border-primary text-primary-foreground shadow-lg shadow-primary/40 scale-110"
                             : "bg-muted border-muted-foreground/30 text-muted-foreground"
                         }`}
                       >
