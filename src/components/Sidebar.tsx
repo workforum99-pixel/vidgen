@@ -24,8 +24,8 @@ export function Sidebar({ className }: SidebarProps) {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className={cn("pb-12 w-64 border-r bg-sidebar text-sidebar-foreground hidden md:block", className)}>
-      <div className="space-y-4 py-4">
+    <div className={cn("pb-12 w-64 border-r bg-sidebar text-sidebar-foreground hidden md:flex md:flex-col", className)}>
+      <div className="space-y-4 py-4 flex-1">
         <div className="px-3 py-2">
           <div className="flex items-center gap-2 px-4 mb-8">
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
@@ -52,18 +52,18 @@ export function Sidebar({ className }: SidebarProps) {
                 My Videos
               </Button>
             </Link>
-            <Link to="/dashboard/templates">
+            <Link to="/dashboard/billing">
               <Button
-                variant={isActive("/dashboard/templates") ? "secondary" : "ghost"}
+                variant={isActive("/dashboard/billing") ? "secondary" : "ghost"}
                 className="w-full justify-start"
               >
-                <LayoutTemplate className="mr-2 h-4 w-4" />
-                Templates
+                <CreditCard className="mr-2 h-4 w-4" />
+                Billing
               </Button>
             </Link>
           </div>
         </div>
-        <div className="px-3 py-2">
+        <div className="px-3 py-2 mt-auto">
           <h2 className="mb-2 px-4 text-xs font-semibold tracking-tight text-muted-foreground">
             Settings
           </h2>
@@ -75,15 +75,6 @@ export function Sidebar({ className }: SidebarProps) {
               >
                 <Settings className="mr-2 h-4 w-4" />
                 Settings
-              </Button>
-            </Link>
-            <Link to="/dashboard/billing">
-              <Button
-                variant={isActive("/dashboard/billing") ? "secondary" : "ghost"}
-                className="w-full justify-start"
-              >
-                <CreditCard className="mr-2 h-4 w-4" />
-                Billing
               </Button>
             </Link>
           </div>
