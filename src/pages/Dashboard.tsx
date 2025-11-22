@@ -63,6 +63,18 @@ export default function Dashboard() {
   const [isScheduling, setIsScheduling] = useState(false);
   const [scheduledTime, setScheduledTime] = useState("");
 
+  // Mock data for videos page
+  const scheduledVideos = [
+    { id: 1, title: "The Future of AI", date: "Oct 24, 2025", time: "10:00 AM" },
+    { id: 2, title: "React 19 Tutorial", date: "Oct 25, 2025", time: "2:00 PM" },
+  ];
+
+  const uploadedVideos = [
+    { id: 3, title: "My First Vlog", views: "1.2k", date: "2 days ago" },
+    { id: 4, title: "Gaming Highlights", views: "540", date: "5 days ago" },
+    { id: 5, title: "Tech Review", views: "10k", date: "1 week ago" },
+  ];
+
   // Check for template data from navigation
   useEffect(() => {
     if (location.state?.referenceUrl && !idea) {
@@ -130,22 +142,67 @@ export default function Dashboard() {
       <main className="flex-1 overflow-y-auto">
         <div className="container mx-auto p-8 max-w-6xl">
           {isVideosPage ? (
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight mb-8">My Videos</h1>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[1, 2, 3].map((i) => (
-                  <Card key={i} className="overflow-hidden">
-                    <div className="aspect-video bg-muted relative group cursor-pointer">
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                        <Play className="h-12 w-12 text-white fill-white" />
+            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              {/* Scheduled Section */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-2">
+                  <CalendarClock className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold tracking-tight">Scheduled Videos</h2>
+                </div>
+                {scheduledVideos.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {scheduledVideos.map((video) => (
+                      <Card key={video.id} className="overflow-hidden border-dashed border-2">
+                        <div className="aspect-video bg-muted/30 relative flex items-center justify-center">
+                          <CalendarClock className="h-10 w-10 text-muted-foreground/50" />
+                          <div className="absolute bottom-2 right-2 bg-background/80 backdrop-blur-sm px-2 py-1 rounded text-xs font-medium border">
+                            Scheduled
+                          </div>
+                        </div>
+                        <CardHeader className="p-4">
+                          <CardTitle className="text-base line-clamp-1">{video.title}</CardTitle>
+                          <CardDescription className="flex flex-col gap-1">
+                            <span className="font-medium text-primary">{video.date} at {video.time}</span>
+                            <span className="text-xs">Ready to publish</span>
+                          </CardDescription>
+                        </CardHeader>
+                      </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-muted-foreground text-sm italic">No videos scheduled.</div>
+                )}
+              </div>
+
+              <Separator />
+
+              {/* Uploaded Section */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-2">
+                  <Youtube className="h-6 w-6 text-red-600" />
+                  <h2 className="text-2xl font-bold tracking-tight">Uploaded Videos</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {uploadedVideos.map((video) => (
+                    <Card key={video.id} className="overflow-hidden group cursor-pointer hover:border-primary/50 transition-colors">
+                      <div className="aspect-video bg-muted relative">
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                          <Play className="h-12 w-12 text-white fill-white drop-shadow-lg" />
+                        </div>
+                        <div className="absolute bottom-2 right-2 bg-black/60 text-white px-1.5 py-0.5 rounded text-xs font-medium">
+                          10:24
+                        </div>
                       </div>
-                    </div>
-                    <CardHeader className="p-4">
-                      <CardTitle className="text-base">Untitled Video {i}</CardTitle>
-                      <CardDescription>Generated 2 days ago</CardDescription>
-                    </CardHeader>
-                  </Card>
-                ))}
+                      <CardHeader className="p-4">
+                        <CardTitle className="text-base line-clamp-1 group-hover:text-primary transition-colors">{video.title}</CardTitle>
+                        <CardDescription className="flex justify-between items-center">
+                          <span>{video.views} views</span>
+                          <span>{video.date}</span>
+                        </CardDescription>
+                      </CardHeader>
+                    </Card>
+                  ))}
+                </div>
               </div>
             </div>
           ) : isTemplatesPage ? (
