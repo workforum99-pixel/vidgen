@@ -126,13 +126,24 @@ export default function Landing() {
                     ))}
                   </div>
                   <div className="flex-1 p-8 flex items-center justify-center relative">
-                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="relative group-hover:scale-110 transition-transform duration-500">
-                          <div className="absolute inset-0 bg-primary blur-2xl opacity-40 rounded-full" />
-                          <div className="h-24 w-24 rounded-full bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-2xl cursor-pointer relative z-10 border-4 border-white/10">
-                            <Play className="h-10 w-10 text-white ml-1 fill-white" />
+                     <div className="absolute inset-0 flex items-center justify-center z-20">
+                        <motion.div 
+                          whileHover={{ scale: 1.05 }}
+                          className="relative cursor-pointer group/play"
+                        >
+                          {/* Animated Rings */}
+                          <div className="absolute inset-0 rounded-full border-2 border-primary/30 animate-[spin_8s_linear_infinite]" />
+                          <div className="absolute -inset-3 rounded-full border border-dashed border-white/20 animate-[spin_12s_linear_infinite_reverse]" />
+                          
+                          {/* Glow */}
+                          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full group-hover/play:bg-primary/40 transition-all duration-500" />
+                          
+                          {/* Button */}
+                          <div className="h-20 w-20 rounded-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-2xl relative z-10 overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-blue-500/20 opacity-0 group-hover/play:opacity-100 transition-opacity duration-500" />
+                            <Play className="h-8 w-8 text-white ml-1 fill-white/90 drop-shadow-lg" />
                           </div>
-                        </div>
+                        </motion.div>
                      </div>
                      {/* Floating Elements in Preview */}
                      <div className="absolute top-10 right-10 p-3 bg-black/60 backdrop-blur-md rounded-lg border border-white/10 shadow-xl animate-float-slow">
